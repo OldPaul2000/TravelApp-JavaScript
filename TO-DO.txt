@@ -1,0 +1,20 @@
+-Simplify returning json response code snippet:
+
+if (!response.ok) {
+      const jsonResponse = await response.json();
+      return { status: jsonResponse.status, message: jsonResponse.message };
+    }
+return { message: "Account deleted succesfully" };
+
+to a function
+================================================================================================================
+
+-check user model functions again:
+return { status: 200, message: "Registered succesfully" };
+was replaced by
+return { status: response.status, message: "Registered succesfully" };
+
+status: 200 was replaced by status: response.status in every fetch function
+
+- change all 'fetch' in api methods names to 'get'
+- implement postNewPicture() function

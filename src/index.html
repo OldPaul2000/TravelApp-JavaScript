@@ -3,19 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Let's Travel</title>
     <link rel="stylesheet" href="assets/styles/style.css" />
-    <script defer type="module" src="./scripts/model/user/user.js"></script>
+    <script defer type="module" src="./scripts/main.js"></script>
   </head>
   <body>
-    <div class="container">
-      <button class="login">Login</button>
-      <button class="logout">Logout</button>
-      <button class="resp">Print response</button>
-    </div>
-    <div class="response">
-      <p class="userId"></p>
-      <p class="jwt"></p>
+    <div class="mainContainer">
+      <div class="controlPanel">
+        <button class="login">Login</button>
+        <button class="logout">Logout</button>
+        <button class="register">Register</button>
+        <button class="resp">Print response</button>
+        <input class="inputFile" type="file" />
+        <button class="submitFile">Upload file</button>
+        <a href="login.html">Login</a>
+        <img class="photo" />
+      </div>
+      <!-- <div class="response"> -->
+      <!-- <p class="responseText-1">Default</p>
+        <p class="responseText-2">Default</p>
+        <p class="responseText-3">Default</p>
+        <p class="responseText-4">Default</p>
+        <p class="responseText-5">Default</p> -->
+      <!-- </div> -->
     </div>
   </body>
 </html>

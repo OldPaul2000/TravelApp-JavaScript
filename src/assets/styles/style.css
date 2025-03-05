@@ -3,19 +3,22 @@ body {
   padding: 0;
 }
 
-.container {
-  width: 300px;
-  height: 120px;
+.mainContainer {
+  display: flex;
+  column-gap: 15px;
+}
+
+.controlPanel {
+  width: 400px;
+  height: 600px;
   border-radius: 10px;
   background-color: antiquewhite;
+  padding: 20px;
+  box-sizing: border-box;
 
-  margin-left: 450px;
-  margin-top: 150px;
-  margin-bottom: 15px;
-
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .login {
@@ -37,7 +40,6 @@ body {
   height: 30px;
   background-color: #fa4c4c;
   text-align: center;
-  margin-left: 15px;
   border: none;
   border-radius: 15px;
   transition: transform 0.15s;
@@ -47,14 +49,24 @@ body {
   transform: translateY(2px);
 }
 
+.register {
+  width: 70px;
+  height: 30px;
+  background-color: #3744cf;
+  text-align: center;
+  border: none;
+  border-radius: 15px;
+  transition: transform 0.15s;
+}
+.register:active {
+  transform: translateY(2px);
+}
+
 .response {
   width: 400px;
-  height: 120px;
+  height: 300px;
   border-radius: 10px;
   background-color: antiquewhite;
-
-  margin-left: 400px;
-  margin-top: 0;
 
   display: flex;
   flex-direction: column;
@@ -67,7 +79,6 @@ body {
   height: 40px;
   background-color: #fa4c4c;
   text-align: center;
-  margin-left: 15px;
   border: none;
   border-radius: 15px;
   transition: transform 0.15s;
