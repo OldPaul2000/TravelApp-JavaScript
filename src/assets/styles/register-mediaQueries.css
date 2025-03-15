@@ -1,0 +1,33 @@
+@media (min-width: 56em) {
+  .register-cassette {
+    width: 23rem;
+    height: 44rem;
+  }
+
+  .register-fields {
+    width: 23rem;
+    height: 44rem;
+  }
+
+  .input-warnings {
+    padding-top: 5rem;
+    padding-left: 3.1rem;
+    gap: 3.13rem;
+  }
+
+  .input-warnings p {
+    font-size: 1.3rem;
+  }
+
+  .username,
+  .password,
+  .password-repeat,
+  .first-name,
+  .last-name,
+  .email,
+  .birth-date,
+  .register-btn {
+    width: 17rem;
+    height: 2.8rem;
+  }
+}

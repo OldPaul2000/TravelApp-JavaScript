@@ -1,0 +1,40 @@
+@media (min-width: 42em) {
+  .login-cassette {
+    width: 19.5rem;
+    height: 29.5rem;
+  }
+
+  .logo-container {
+    margin-bottom: 1.2rem;
+  }
+
+  .logo {
+    font-size: 2.6rem;
+  }
+
+  .username,
+  .password {
+    width: 15rem;
+    height: 2.6rem;
+    font-size: 1.3rem;
+  }
+
+  .input-warnings {
+    gap: 2rem;
+    padding-top: 0.3rem;
+  }
+
+  .input-warnings p {
+    font-size: 1.4rem;
+  }
+
+  .username::placeholder,
+  .password::placeholder {
+    font-size: 1.3rem;
+  }
+
+  .main-page:link,
+  .register:link {
+    font-size: 1.35rem;
+  }
+}

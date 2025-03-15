@@ -4,6 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="assets/styles/general.css" />
+    <link rel="stylesheet" href="assets/styles/login.css" />
+    <link rel="stylesheet" href="assets/styles/login-mediaQueries.css" />
+    <script
+      defer
+      src="./scripts/controller/loginController.js"
+      type="module"
+    ></script>
   </head>
-  <body></body>
+  <body>
+    <div class="main-container">
+      <img
+        class="background-image"
+        src="assets/images/IMG_20230421_201251385_HDR.jpg"
+      />
+      <main class="login-cassette">
+        <div class="logo-container">
+          <p class="logo">Let's Travel</p>
+        </div>
+        <div class="login-fields">
+          <div class="input-warnings">
+            <p class="username-warn">&nbsp;</p>
+            <p class="password-warn">&nbsp;</p>
+          </div>
+          <div class="input-fields">
+            <input class="username" type="text" placeholder="Username" />
+            <input class="password" type="password" placeholder="Password" />
+            <input class="login-btn" type="button" value="Login" />
+          </div>
+        </div>
+        <div class="cassette-footer">
+          <a class="register" href="register.html">Create account</a>
+          <a class="main-page" href="index.html">Go to main page</a>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>

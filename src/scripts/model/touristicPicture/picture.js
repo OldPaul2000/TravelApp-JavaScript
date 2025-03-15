@@ -1,5 +1,6 @@
 import { loginCache } from "../../../cache/loginSessionCredentials";
 import * as csrfUtil from "/src/scripts/util/csrfUtil.js";
+import * as modelUtil from "../../util/modelUtil.js";
 import { myHeaders } from "/src/cache/headers.js";
 
 export const getPictureById = async function (pictureId) {
@@ -11,88 +12,174 @@ export const getPictureById = async function (pictureId) {
         mode: "cors",
       }
     );
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
   } catch (err) {
     return err.message;
   }
 };
 
-export const getPicturesFromUser = async function (userId) {
+export const getPicturesFromUser = async function (userId, pageStart, offset) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/users/${userId}/pictures`,
+      `http://localhost:8080/api/v1/users/${userId}/pictures?pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
       }
     );
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
   } catch (err) {
     return err.message;
   }
 };
 
-export const getPicturesByCity = async function (city) {
+export const getPicturesFromUserAndPlaceType = async function (
+  userId,
+  placeType,
+  pageStart,
+  offset
+) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/cities/pictures?city=${city}`,
+      `http://localhost:8080/api/v1/users/${userId}/place-types/pictures?placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
       }
     );
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
   } catch (err) {
     return err.message;
   }
 };
 
-export const getPicturesByCommune = async function (commune) {
+export const getPicturesByCity = async function (city, pageStart, offset) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/communes/pictures?commune=${commune}`,
+      `http://localhost:8080/api/v1/cities/pictures?city=${city}&pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
       }
     );
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
   } catch (err) {
     return err.message;
   }
 };
 
-export const getPicturesByVillage = async function (village) {
+export const getPicturesByCityAndPlaceType = async function (
+  city,
+  placeType,
+  pageStart,
+  offset
+) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/villages/pictures?village=${village}`,
+      `http://localhost:8080/api/v1/cities/place-types/pictures?city=${city}&placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
       }
     );
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
   } catch (err) {
     return err.message;
   }
 };
 
-export const getPicturesByPlaceName = async function (placeName) {
+export const getPicturesByCommune = async function (
+  commune,
+  pageStart,
+  offset
+) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/place-names/pictures?placeName=${placeName}`,
+      `http://localhost:8080/api/v1/communes/pictures?commune=${commune}&pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
       }
     );
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
+  } catch (err) {
+    return err.message;
+  }
+};
+
+export const getPicturesByCommuneAndPlaceType = async function (
+  commune,
+  placeType,
+  pageStart,
+  offset
+) {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/communes/place-types/pictures?commune=${commune}&placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`,
+      {
+        method: "GET",
+        mode: "cors",
+      }
+    );
+    return await response.json();
+  } catch (err) {
+    return err.message;
+  }
+};
+
+export const getPicturesByVillage = async function (
+  village,
+  pageStart,
+  offset
+) {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/villages/pictures?village=${village}&pageStart=${pageStart}&offset=${offset}`,
+      {
+        method: "GET",
+        mode: "cors",
+      }
+    );
+    return await response.json();
+  } catch (err) {
+    return err.message;
+  }
+};
+
+export const getPicturesByVillageAndPlaceType = async function (
+  village,
+  placeType,
+  pageStart,
+  offset
+) {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/villages/place-types/pictures?village=${village}&placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`,
+      {
+        method: "GET",
+        mode: "cors",
+      }
+    );
+    return await response.json();
+  } catch (err) {
+    return err.message;
+  }
+};
+
+export const getPicturesByPlaceName = async function (
+  placeName,
+  pageStart,
+  offset
+) {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/v1/place-names/pictures?placeName=${placeName}&pageStart=${pageStart}&offset=${offset}`,
+      {
+        method: "GET",
+        mode: "cors",
+      }
+    );
+    return await response.json();
   } catch (err) {
     return err.message;
   }
@@ -141,11 +228,7 @@ export const deletePicture = async function (pictureId) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return response.status;
+    return await modelUtil.getResponse(response);
   } catch (err) {
     return err.message;
   }
@@ -165,11 +248,7 @@ export const commentPicture = async function (pictureId, comment) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return response.status;
+    return await modelUtil.getResponse(response);
   } catch (err) {
     return err.message;
   }
@@ -189,27 +268,26 @@ export const editPictureComment = async function (commentId, editedComment) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return response.status;
+    return await modelUtil.getResponse(response);
   } catch (err) {
     return err.message;
   }
 };
 
-export const getPictureComments = async function (pictureId) {
+export const getPictureComments = async function (
+  pictureId,
+  pageStart,
+  offset
+) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/pictures/comments/${pictureId}`,
+      `http://localhost:8080/api/v1/pictures/comments/${pictureId}?pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
       }
     );
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
   } catch (err) {
     return err.message;
   }
@@ -224,8 +302,7 @@ export const getPictureCommentsCount = async function (pictureId) {
         mode: "cors",
       }
     );
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
   } catch (err) {
     return err.message;
   }
@@ -244,11 +321,7 @@ export const deleteComment = async function (commentId) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return response.status;
+    return await modelUtil.getResponse(response);
   } catch (err) {
     return err.message;
   }
@@ -267,33 +340,27 @@ export const likePicture = async function (pictureId) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return response.status;
+    return await modelUtil.getResponse(response);
   } catch (err) {
     return err.message;
   }
 };
 
-export const getPictureLikes = async function (pictureId) {
+export const getPictureLikes = async function (pictureId, pageStart, offset) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/pictures/likes/${pictureId}`,
+      `http://localhost:8080/api/v1/pictures/likes/${pictureId}?pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
       }
     );
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
   } catch (err) {
     return err.message;
   }
 };
 
-/* Works */
 export const getPictureLikesCount = async function (pictureId) {
   try {
     const response = await fetch(
@@ -303,8 +370,7 @@ export const getPictureLikesCount = async function (pictureId) {
         mode: "cors",
       }
     );
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
   } catch (err) {
     return err.message;
   }
@@ -323,11 +389,7 @@ export const dislikePicture = async function (pictureId) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return response.status;
+    return await modelUtil.getResponse(response);
   } catch (err) {
     return err.message;
   }

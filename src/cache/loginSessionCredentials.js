@@ -72,6 +72,21 @@ class LoginCache {
     return this.#jwt;
   }
 
+  loginInfo() {
+    return {
+      userId: this.#userId,
+      roles: this.#roles,
+      firstName: this.#firstName,
+      lastName: this.#lastName,
+      email: this.#email,
+      birthDate: this.#birthDate,
+      registrationDate: this.#registrationDate,
+      profilePictureName: this.#profilePictureName,
+      profilePictureBytes: this.#profilePictureBytes,
+      jwt: this.#jwt,
+    };
+  }
+
   clearData() {
     this.#userId = -1;
     this.#roles = null;

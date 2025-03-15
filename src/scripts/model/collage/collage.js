@@ -1,5 +1,6 @@
 import { loginCache } from "../../../cache/loginSessionCredentials";
 import * as csrfUtil from "/src/scripts/util/csrfUtil.js";
+import * as modelUtil from "../../util/modelUtil.js";
 import { myHeaders } from "/src/cache/headers.js";
 
 export const postNewCollage = async function (collagePost) {
@@ -16,11 +17,7 @@ export const postNewCollage = async function (collagePost) {
         body: JSON.stringify(collagePost),
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return response.status;
+    return await modelUtil.getResponse(response);
   } catch (err) {
     return err.message;
   }
@@ -39,11 +36,7 @@ export const deleteCollage = async function (collageId) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return response.status;
+    return await modelUtil.getResponse(response);
   } catch (err) {
     return err.message;
   }
@@ -60,11 +53,7 @@ export const getCollage = async function (collageId) {
         headers: myHeaders,
       }
     );
-    const jsonResponse = await response.json();
-    if (!response.ok) {
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return jsonResponse;
+    return await modelUtil.getJsonResponse(response);
   } catch (err) {
     return err.message;
   }
@@ -84,11 +73,7 @@ export const postCollageComment = async function (collageId, comment) {
         body: JSON.stringify(comment),
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return response.status;
+    return await modelUtil.getResponse(response);
   } catch (err) {
     return err.message;
   }
@@ -108,11 +93,7 @@ export const editCollageComment = async function (commentId, comment) {
         body: JSON.stringify(comment),
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return response.status;
+    return await modelUtil.getResponse(response);
   } catch (err) {
     return err.message;
   }
@@ -131,20 +112,20 @@ export const deleteCollageComment = async function (commentId) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return response.status;
+    return await modelUtil.getResponse(response);
   } catch (err) {
     return err.message;
   }
 };
 
-export const getCollageComments = async function (collageId) {
+export const getCollageComments = async function (
+  collageId,
+  pageStart,
+  offset
+) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/collages/comments/${collageId}`,
+      `http://localhost:8080/api/v1/collages/comments/${collageId}?pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -152,11 +133,7 @@ export const getCollageComments = async function (collageId) {
         headers: myHeaders,
       }
     );
-    const jsonResponse = await response.json();
-    if (!response.ok) {
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return jsonResponse;
+    return await modelUtil.getJsonResponse(response);
   } catch (err) {
     return err.message;
   }
@@ -173,11 +150,7 @@ export const getCollageCommentsCount = async function (collageId) {
         headers: myHeaders,
       }
     );
-    const jsonResponse = await response.json();
-    if (!response.ok) {
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return jsonResponse;
+    return await modelUtil.getJsonResponse(response);
   } catch (err) {
     return err.message;
   }
@@ -196,11 +169,7 @@ export const likeCollage = async function (collageId) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return response.status;
+    return modelUtil.getResponse(response);
   } catch (err) {
     return err.message;
   }
@@ -219,20 +188,16 @@ export const dislikeCollage = async function (collageId) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return response.status;
+    return await modelUtil.getResponse(response);
   } catch (err) {
     return err.message;
   }
 };
 
-export const getCollageLikes = async function (collageId) {
+export const getCollageLikes = async function (collageId, pageStart, offset) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/collages/likes/${collageId}`,
+      `http://localhost:8080/api/v1/collages/likes/${collageId}?pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -240,11 +205,7 @@ export const getCollageLikes = async function (collageId) {
         headers: myHeaders,
       }
     );
-    const jsonResponse = await response.json();
-    if (!response.ok) {
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return jsonResponse;
+    return await modelUtil.getJsonResponse(response);
   } catch (err) {
     return err.message;
   }
@@ -261,11 +222,7 @@ export const getCollageLikesCount = async function (collageId) {
         headers: myHeaders,
       }
     );
-    const jsonResponse = await response.json();
-    if (!response.ok) {
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return jsonResponse;
+    return await modelUtil.getJsonResponse(response);
   } catch (err) {
     return err.message;
   }

@@ -1,5 +1,6 @@
 import { LoginCache } from "../../../cache/loginSessionCredentials";
 import * as csrfUtil from "/src/scripts/util/csrfUtil.js";
+import * as modelUtil from "../../util/modelUtil.js";
 import { myHeaders } from "/src/cache/headers.js";
 
 export const getCountry = async function (country) {
@@ -11,8 +12,7 @@ export const getCountry = async function (country) {
         mode: "cors",
       }
     );
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
   } catch (err) {
     return err.message;
   }
@@ -27,8 +27,7 @@ export const getCity = async function (city) {
         mode: "cors",
       }
     );
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
   } catch (err) {
     return err.message;
   }
@@ -43,8 +42,7 @@ export const getCommune = async function (commune) {
         mode: "cors",
       }
     );
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
   } catch (err) {
     return err.message;
   }
@@ -59,8 +57,22 @@ export const getVillage = async function (village) {
         mode: "cors",
       }
     );
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
+  } catch (err) {
+    return err.message;
+  }
+};
+
+export const getPlaceTypes = async function () {
+  try {
+    const response = await fetch(
+      "http://localhost:8080/api/v1/places/place-types",
+      {
+        method: "GET",
+        mode: "cors",
+      }
+    );
+    return await response.json();
   } catch (err) {
     return err.message;
   }
@@ -81,13 +93,9 @@ export const addCountry = async function (country) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return jsonResponse;
-    }
-    return response;
+    return await modelUtil.getResponse(response, "Country added succesfully");
   } catch (err) {
-    return { status: response.status, message: "Country added succesfully" };
+    return err.message;
   }
 };
 
@@ -106,11 +114,7 @@ export const addCity = async function (countryId, city) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return jsonResponse;
-    }
-    return { status: response.status, message: "City added succesfully" };
+    return await modelUtil.getResponse(response, "City added succesfully");
   } catch (err) {
     return err.message;
   }
@@ -131,11 +135,7 @@ export const addCommune = async function (cityId, commune) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return jsonResponse;
-    }
-    return { status: response.status, message: "Commune added succesfully" };
+    return await modelUtil.getResponse(response, "Commune added succesfully");
   } catch (err) {
     return err.message;
   }
@@ -156,11 +156,7 @@ export const addVillage = async function (communeId, village) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return jsonResponse;
-    }
-    return { status: response.status, message: "Village added succesfully" };
+    return await modelUtil.getResponse(response, "Village added succesfully");
   } catch (err) {
     return err.message;
   }

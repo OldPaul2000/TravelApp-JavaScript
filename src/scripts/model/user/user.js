@@ -1,4 +1,5 @@
 import * as csrfUtil from "/src/scripts/util/csrfUtil.js";
+import * as modelUtil from "../../util/modelUtil.js";
 import { myHeaders } from "/src/cache/headers.js";
 import { loginCache } from "../../../cache/loginSessionCredentials";
 
@@ -8,17 +9,16 @@ export const getUserById = async function (id) {
       method: "GET",
       mode: "cors",
     });
-    const jsonResponse = await response.json();
-    return jsonResponse;
+    return await response.json();
   } catch (err) {
     return err.message;
   }
 };
 
-export const getCollagesFromUser = async function (userId) {
+export const getCollagesFromUser = async function (userId, startPage, offset) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/users/collages/${userId}`,
+      `http://localhost:8080/api/v1/users/collages/${userId}?startPage=${startPage}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -26,11 +26,7 @@ export const getCollagesFromUser = async function (userId) {
         headers: myHeaders,
       }
     );
-    const jsonResponse = await response.json();
-    if (!response.ok) {
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return jsonResponse;
+    return await modelUtil.getJsonResponse(response);
   } catch (err) {
     return err.message;
   }
@@ -86,14 +82,7 @@ export const register = async function (registrationInfo) {
         headers: { "Content-Type": "application/json" },
       }
     );
-    if (!response.ok) {
-      const jsonResp = await response.json();
-      return {
-        status: jsonResp.status,
-        message: jsonResp.message,
-      };
-    }
-    return { status: response.status, message: "Registered succesfully" };
+    return await modelUtil.getResponse(response, "Registered succesfully");
   } catch (err) {
     return err.message;
   }
@@ -134,7 +123,7 @@ export const updateProfilePicture = async function (file) {
   formData.append("file", file);
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/users/profile-pictures/${loginCache.getId()}`,
+      `http://localhost:8080/api/v1/users/profile-pictures/${loginCache.getUserId()}`,
       {
         method: "PUT",
         mode: "cors",
@@ -145,17 +134,10 @@ export const updateProfilePicture = async function (file) {
     );
     myHeaders.delete("Accept");
     myHeaders.set("Content-Type", "application/json");
-    if (!response.ok) {
-      const jsonResp = await response.json();
-      return {
-        status: jsonResp.status,
-        message: jsonResp.message,
-      };
-    }
-    return {
-      status: response.status,
-      message: "Picture uploaded succesfully",
-    };
+    return await modelUtil.getResponse(
+      response,
+      "Picture uploaded succesfully"
+    );
   } catch (err) {
     return err.message;
   }
@@ -175,14 +157,10 @@ export const updateUserInfo = async function (newUserInfo) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return {
-      status: response.status,
-      message: "User info updated succesfully",
-    };
+    return await modelUtil.getResponse(
+      response,
+      "User info updated succesfully"
+    );
   } catch (err) {
     return err.message;
   }
@@ -201,11 +179,7 @@ export const deleteAccount = async function (deleteTouristicPictures) {
         headers: myHeaders,
       }
     );
-    if (!response.ok) {
-      const jsonResponse = await response.json();
-      return { status: jsonResponse.status, message: jsonResponse.message };
-    }
-    return { status: response.status, message: "Account deleted succesfully" };
+    return await modelUtil.getResponse(register, "Account deleted succesfully");
   } catch (err) {
     return err.message;
   }

@@ -1,6 +1,7 @@
 import "core-js/stable";
 // For Polifilling async functions
 import "regenerator-runtime";
+import { query } from "./util/query";
 import { loginCache } from "../cache/loginSessionCredentials";
 import * as user from "/src/scripts/model/user/user.js";
 import * as place from "/src/scripts/model/place/place.js";
@@ -9,12 +10,12 @@ import * as collage from "/src/scripts/model/collage/collage.js";
 import ExifReader from "exifreader";
 import { likePicture } from "./model/touristicPicture/picture";
 
-const loginBtn = document.querySelector(".login");
-const logoutBtn = document.querySelector(".logout");
-const registerBtn = document.querySelector(".register");
-const printResponseBtn = document.querySelector(".resp");
-const inputFile = document.querySelector(".inputFile");
-const submitFile = document.querySelector(".submitFile");
+const loginBtn = query(".login");
+const logoutBtn = query(".logout");
+const registerBtn = query(".register");
+const printResponseBtn = query(".resp");
+const inputFile = query(".inputFile");
+const submitFile = query(".submitFile");
 
 logoutBtn.addEventListener("click", () => {
   user.logout().then((resp) => {
@@ -24,22 +25,29 @@ logoutBtn.addEventListener("click", () => {
 loginBtn.addEventListener("click", () => {
   user.login({ username: "Paul", password: "paul1234" }).then((resp) => {
     console.log(resp);
-    console.log(loginCache.getUserId());
-    console.log(`${loginCache.getFirstName()} ${loginCache.getLastName()}`);
+    console.log(loginCache.loginInfo());
   });
 });
 registerBtn.addEventListener("click", () => {});
 submitFile.addEventListener("click", () => {
-  uploadPicture();
+  // uploadPicture();
+  setProfilePicture();
 });
 
 printResponseBtn.addEventListener("click", () => {
-  picture.deleteComment(5).then((resp) => {
+  picture.getPicturesByPlaceName("Pestera ursilor", 3, 4).then((resp) => {
     console.log(resp);
   });
 });
 
 // ================= Examples For Testing =================
+
+const setProfilePicture = function () {
+  const file = inputFile.files[0];
+  user.updateProfilePicture(file).then((resp) => {
+    console.log(resp);
+  });
+};
 
 const getPicture = function (pictureId) {
   picture.getPictureById(7).then((resp) => {
@@ -73,33 +81,23 @@ const register = function () {
 
 const uploadPicture = function () {
   const file = inputFile.files[0];
-  const blob = new Blob([file]);
-
-  blob.arrayBuffer().then((buffer) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.addEventListener("load", () => {
-      photo.style.width = "200px";
-      photo.src = `${reader.result}`;
+  picture
+    .postNewPicture(
+      {
+        description: "A very nice waterfall",
+        country: "Romania",
+        city: "Alba Iulia",
+        commune: "Garda de sus",
+        village: "Dealu Frumos",
+        placeName: "Cascada Cascadelor",
+        placeType: "Cascada",
+        latitude: 41.41211,
+        longitude: 44.14214,
+      },
+      file
+    )
+    .then((res) => {
+      console.log(res);
     });
-  });
-
-  // picture
-  //   .postNewPicture(
-  //     {
-  //       description: "A very nice waterfall",
-  //       country: "Romania",
-  //       city: "Alba Iulia",
-  //       commune: "Garda de sus",
-  //       village: "Dealu Frumos",
-  //       placeName: "Cascada Cascadelor",
-  //       latitude: 41.41211,
-  //       longitude: 44.14214,
-  //     },
-  //     file
-  //   )
-  //   .then((res) => {
-  //     console.log(res);
-  //   });
 };
 // ================= Examples For Testing =================

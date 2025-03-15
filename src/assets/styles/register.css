@@ -1,0 +1,123 @@
+.register-label {
+  font-family: Roboto;
+  font-size: 2rem;
+  color: #333333;
+  border-bottom: solid 0.1rem #b5b5b5;
+}
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  filter: brightness(0.9);
+}
+
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.register-cassette {
+  position: relative;
+  width: 20rem;
+  height: 40rem;
+  background-color: #fafef9;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 2fr;
+  border-radius: 0.8rem;
+  transition: all 0.5s;
+  box-shadow: 0 0.1rem 1rem 0.2rem rgba(0, 0, 0, 0.6);
+}
+
+.register-fields {
+  width: 20rem;
+  height: 40rem;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  row-gap: 1.4rem;
+  padding: 2rem;
+}
+
+/* need to set grid-row grid-column to both elements at the 
+   same time in order to make css understand
+   that we want to overlap elements in a grid */
+.register-fields,
+.input-warnings {
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+}
+
+.input-warnings {
+  width: 20rem;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5rem;
+  padding-left: 2.6rem;
+  gap: 2.7rem;
+}
+
+.input-warnings p {
+  font-size: 1.2rem;
+  font-family: Roboto;
+  color: #fc1b1b;
+}
+
+.username,
+.password,
+.password-repeat,
+.first-name,
+.last-name,
+.email,
+.birth-date,
+.register-btn {
+  font-size: 1.2rem;
+  height: 2.4rem;
+  width: 15rem;
+  border: solid 0.1rem #c1c1c1;
+  outline: 0;
+  border-radius: 0.3rem;
+  padding: 0 0.5rem 0 0.5rem;
+  box-shadow: 0.2rem 0.3rem 1rem rgba(0, 0, 0, 0.1);
+  color: #333333;
+}
+
+.valid-field {
+  border: solid 0.2rem rgba(56, 195, 54, 0.8);
+}
+.valid-field:focus {
+  border: solid 0.2rem rgba(56, 195, 54, 0.8) !important;
+}
+
+.register-btn {
+  background-color: rgba(134, 136, 138, 0.3);
+  color: black;
+  font-family: Roboto;
+  font-size: 1.3rem;
+  height: 2.4rem;
+  border: none;
+  border-radius: 0.3rem;
+  outline: 0;
+  transition: box-shadow 0.1s;
+}
+
+.register-btn:hover {
+  border: solid 0.1rem #c1c1c1;
+  box-shadow: 0 0 1rem rgba(35, 35, 35, 0.2);
+}
+
+.username:focus,
+.password:focus,
+.password-repeat:focus,
+.first-name:focus,
+.last-name:focus,
+.email:focus,
+.birth-date:focus,
+.register-btn:focus {
+  border: solid 0.2rem #c1c1c1;
+}
