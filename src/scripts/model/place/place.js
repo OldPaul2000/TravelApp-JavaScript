@@ -6,7 +6,7 @@ import { myHeaders } from "/src/cache/headers.js";
 export const getCountry = async function (country) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/places/countries?country=${country}`,
+      `http://${API_URL}:${API_PORT}/api/v1/places/countries?country=${country}`,
       {
         method: "GET",
         mode: "cors",
@@ -21,7 +21,7 @@ export const getCountry = async function (country) {
 export const getCity = async function (city) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/places/cities?city=${city}`,
+      `http://${API_URL}:${API_PORT}/api/v1/places/cities?city=${city}`,
       {
         method: "GET",
         mode: "cors",
@@ -36,7 +36,7 @@ export const getCity = async function (city) {
 export const getCommune = async function (commune) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/places/communes?commune=${commune}`,
+      `http://${API_URL}:${API_PORT}/api/v1/places/communes?commune=${commune}`,
       {
         method: "GET",
         mode: "cors",
@@ -51,7 +51,7 @@ export const getCommune = async function (commune) {
 export const getVillage = async function (village) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/places/villages?village=${village}`,
+      `http://${API_URL}:${API_PORT}/api/v1/places/villages?village=${village}`,
       {
         method: "GET",
         mode: "cors",
@@ -66,7 +66,7 @@ export const getVillage = async function (village) {
 export const getPlaceTypes = async function () {
   try {
     const response = await fetch(
-      "http://localhost:8080/api/v1/places/place-types",
+      `http://${API_URL}:${API_PORT}/api/v1/places/place-types`,
       {
         method: "GET",
         mode: "cors",
@@ -84,7 +84,7 @@ export const addCountry = async function (country) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/places/countries`,
+      `http://${API_URL}:${API_PORT}/api/v1/places/countries`,
       {
         method: "POST",
         mode: "cors",
@@ -105,7 +105,7 @@ export const addCity = async function (countryId, city) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/places/cities/${countryId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/places/cities/${countryId}`,
       {
         method: "POST",
         mode: "cors",
@@ -126,7 +126,7 @@ export const addCommune = async function (cityId, commune) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/places/communes/${cityId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/places/communes/${cityId}`,
       {
         method: "POST",
         mode: "cors",
@@ -147,7 +147,7 @@ export const addVillage = async function (communeId, village) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/places/villages/${communeId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/places/villages/${communeId}`,
       {
         method: "POST",
         mode: "cors",

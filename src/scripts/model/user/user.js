@@ -1,14 +1,18 @@
 import * as csrfUtil from "/src/scripts/util/csrfUtil.js";
 import * as modelUtil from "../../util/modelUtil.js";
+import { API_URL, API_PORT } from "../../constants/apiAddress.js";
 import { myHeaders } from "/src/cache/headers.js";
 import { loginCache } from "../../../cache/loginSessionCredentials";
 
 export const getUserById = async function (id) {
   try {
-    const response = await fetch(`http://localhost:8080/api/v1/users/${id}`, {
-      method: "GET",
-      mode: "cors",
-    });
+    const response = await fetch(
+      `http://${API_URL}:${API_PORT}/api/v1/users/${id}`,
+      {
+        method: "GET",
+        mode: "cors",
+      }
+    );
     return await response.json();
   } catch (err) {
     return err.message;
@@ -18,7 +22,7 @@ export const getUserById = async function (id) {
 export const getCollagesFromUser = async function (userId, startPage, offset) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/users/collages/${userId}?startPage=${startPage}&offset=${offset}`,
+      `http://${API_URL}:${API_PORT}/api/v1/users/collages/${userId}?startPage=${startPage}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -35,13 +39,16 @@ export const getCollagesFromUser = async function (userId, startPage, offset) {
 export const login = async function (credentials) {
   myHeaders.set("Content-Type", "application/json");
   try {
-    const response = await fetch("http://localhost:8080/api/v1/users/login", {
-      method: "POST",
-      mode: "cors",
-      credentials: "include",
-      body: JSON.stringify(credentials),
-      headers: myHeaders,
-    });
+    const response = await fetch(
+      `http://${API_URL}:${API_PORT}/api/v1/users/login`,
+      {
+        method: "POST",
+        mode: "cors",
+        credentials: "include",
+        body: JSON.stringify(credentials),
+        headers: myHeaders,
+      }
+    );
     const jsonResponse = await response.json();
     if (!response.ok) {
       return {
@@ -73,7 +80,7 @@ export const register = async function (registrationInfo) {
   myHeaders.set("Content-Type", "application/json");
   try {
     const response = await fetch(
-      "http://localhost:8080/api/v1/users/register",
+      `http://${API_URL}:${API_PORT}/api/v1/users/register`,
       {
         method: "POST",
         mode: "cors",
@@ -92,12 +99,15 @@ export const logout = async function () {
   await csrfUtil.fetchCsrf();
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
-    const response = await fetch("http://localhost:8080/api/v1/users/logout", {
-      method: "POST",
-      mode: "cors",
-      credentials: "include",
-      headers: myHeaders,
-    });
+    const response = await fetch(
+      `http://${API_URL}:${API_PORT}/api/v1/users/logout`,
+      {
+        method: "POST",
+        mode: "cors",
+        credentials: "include",
+        headers: myHeaders,
+      }
+    );
     if (!response.ok) {
       return await response.json();
     }
@@ -123,7 +133,7 @@ export const updateProfilePicture = async function (file) {
   formData.append("file", file);
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/users/profile-pictures/${loginCache.getUserId()}`,
+      `http://${API_URL}:${API_PORT}/api/v1/users/profile-pictures/${loginCache.getUserId()}`,
       {
         method: "PUT",
         mode: "cors",
@@ -148,7 +158,7 @@ export const updateUserInfo = async function (newUserInfo) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/users/user-info/${loginCache.getUserId()}`,
+      `http://${API_URL}:${API_PORT}/api/v1/users/user-info/${loginCache.getUserId()}`,
       {
         method: "PUT",
         mode: "cors",
@@ -171,7 +181,7 @@ export const deleteAccount = async function (deleteTouristicPictures) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/users/${loginCache.getUserId()}?deletePictures=${deleteTouristicPictures}`,
+      `http://${API_URL}:${API_PORT}/api/v1/users/${loginCache.getUserId()}?deletePictures=${deleteTouristicPictures}`,
       {
         method: "DELETE",
         mode: "cors",

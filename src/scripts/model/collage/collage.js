@@ -8,7 +8,7 @@ export const postNewCollage = async function (collagePost) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/collages/${loginCache.getUserId()}`,
+      `http://${API_URL}:${API_PORT}/api/v1/collages/${loginCache.getUserId()}`,
       {
         method: "POST",
         mode: "cors",
@@ -28,7 +28,7 @@ export const deleteCollage = async function (collageId) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/collages/${loginCache.getUserId()}/${collageId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/collages/${loginCache.getUserId()}/${collageId}`,
       {
         method: "DELETE",
         mode: "cors",
@@ -45,7 +45,7 @@ export const deleteCollage = async function (collageId) {
 export const getCollage = async function (collageId) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/collages/${collageId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/collages/${collageId}`,
       {
         method: "GET",
         mode: "cors",
@@ -64,7 +64,7 @@ export const postCollageComment = async function (collageId, comment) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/collages/comments/${loginCache.getUserId()}/${collageId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/collages/comments/${loginCache.getUserId()}/${collageId}`,
       {
         method: "POST",
         mode: "cors",
@@ -84,7 +84,7 @@ export const editCollageComment = async function (commentId, comment) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/collages/comments/${loginCache.getUserId()}/${commentId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/collages/comments/${loginCache.getUserId()}/${commentId}`,
       {
         method: "PUT",
         mode: "cors",
@@ -104,7 +104,7 @@ export const deleteCollageComment = async function (commentId) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/collages/comments/${loginCache.getUserId()}/${commentId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/collages/comments/${loginCache.getUserId()}/${commentId}`,
       {
         method: "DELETE",
         mode: "cors",
@@ -125,7 +125,7 @@ export const getCollageComments = async function (
 ) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/collages/comments/${collageId}?pageStart=${pageStart}&offset=${offset}`,
+      `http://${API_URL}:${API_PORT}/api/v1/collages/comments/${collageId}?pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -142,7 +142,7 @@ export const getCollageComments = async function (
 export const getCollageCommentsCount = async function (collageId) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/collages/comments/count/${collageId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/collages/comments/count/${collageId}`,
       {
         method: "GET",
         mode: "cors",
@@ -161,7 +161,7 @@ export const likeCollage = async function (collageId) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/collages/likes/${loginCache.getUserId()}/${collageId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/collages/likes/${loginCache.getUserId()}/${collageId}`,
       {
         method: "POST",
         mode: "cors",
@@ -180,7 +180,7 @@ export const dislikeCollage = async function (collageId) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/collages/likes/${loginCache.getUserId()}/${collageId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/collages/likes/${loginCache.getUserId()}/${collageId}`,
       {
         method: "DELETE",
         mode: "cors",
@@ -197,7 +197,7 @@ export const dislikeCollage = async function (collageId) {
 export const getCollageLikes = async function (collageId, pageStart, offset) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/collages/likes/${collageId}?pageStart=${pageStart}&offset=${offset}`,
+      `http://${API_URL}:${API_PORT}/api/v1/collages/likes/${collageId}?pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -214,7 +214,7 @@ export const getCollageLikes = async function (collageId, pageStart, offset) {
 export const getCollageLikesCount = async function (collageId) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/collages/likes/count/${collageId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/collages/likes/count/${collageId}`,
       {
         method: "GET",
         mode: "cors",

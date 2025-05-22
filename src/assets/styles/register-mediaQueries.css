@@ -1,4 +1,5 @@
-@media (min-width: 56em) {
+/* Phones */
+@media (min-width: 30em) and (orientation: portrait) {
   .register-cassette {
     width: 23rem;
     height: 44rem;
@@ -29,5 +30,29 @@
   .register-btn {
     width: 17rem;
     height: 2.8rem;
+  }
+}
+
+/* Phones */
+@media (min-width: 30em) and (orientation: landscape) {
+  .main-container {
+    height: 150vh;
+  }
+
+  .background-image {
+    height: inherit;
+  }
+}
+
+/* Tablets and desktop */
+@media (min-width: 65rem) and (orientation: landscape) {
+  .main-container {
+    height: 100vh;
+  }
+
+  .input-warnings {
+    padding-top: 6.5rem;
+    padding-left: 3.1rem;
+    gap: 2.7rem;
   }
 }

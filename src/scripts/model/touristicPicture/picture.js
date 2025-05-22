@@ -6,7 +6,7 @@ import { myHeaders } from "/src/cache/headers.js";
 export const getPictureById = async function (pictureId) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/pictures/${pictureId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/pictures/${pictureId}`,
       {
         method: "GET",
         mode: "cors",
@@ -21,7 +21,7 @@ export const getPictureById = async function (pictureId) {
 export const getPicturesFromUser = async function (userId, pageStart, offset) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/users/${userId}/pictures?pageStart=${pageStart}&offset=${offset}`,
+      `http://${API_URL}:${API_PORT}/api/v1/users/${userId}/pictures?pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -41,7 +41,7 @@ export const getPicturesFromUserAndPlaceType = async function (
 ) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/users/${userId}/place-types/pictures?placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`,
+      `http://${API_URL}:${API_PORT}/api/v1/users/${userId}/place-types/pictures?placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -56,7 +56,7 @@ export const getPicturesFromUserAndPlaceType = async function (
 export const getPicturesByCity = async function (city, pageStart, offset) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/cities/pictures?city=${city}&pageStart=${pageStart}&offset=${offset}`,
+      `http://${API_URL}:${API_PORT}/api/v1/cities/pictures?city=${city}&pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -76,7 +76,7 @@ export const getPicturesByCityAndPlaceType = async function (
 ) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/cities/place-types/pictures?city=${city}&placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`,
+      `http://${API_URL}:${API_PORT}/api/v1/cities/place-types/pictures?city=${city}&placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -95,7 +95,7 @@ export const getPicturesByCommune = async function (
 ) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/communes/pictures?commune=${commune}&pageStart=${pageStart}&offset=${offset}`,
+      `http://${API_URL}:${API_PORT}/api/v1/communes/pictures?commune=${commune}&pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -115,7 +115,7 @@ export const getPicturesByCommuneAndPlaceType = async function (
 ) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/communes/place-types/pictures?commune=${commune}&placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`,
+      `http://${API_URL}:${API_PORT}/api/v1/communes/place-types/pictures?commune=${commune}&placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -134,7 +134,7 @@ export const getPicturesByVillage = async function (
 ) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/villages/pictures?village=${village}&pageStart=${pageStart}&offset=${offset}`,
+      `http://${API_URL}:${API_PORT}/api/v1/villages/pictures?village=${village}&pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -154,7 +154,7 @@ export const getPicturesByVillageAndPlaceType = async function (
 ) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/villages/place-types/pictures?village=${village}&placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`,
+      `http://${API_URL}:${API_PORT}/api/v1/villages/place-types/pictures?village=${village}&placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -173,7 +173,7 @@ export const getPicturesByPlaceName = async function (
 ) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/place-names/pictures?placeName=${placeName}&pageStart=${pageStart}&offset=${offset}`,
+      `http://${API_URL}:${API_PORT}/api/v1/place-names/pictures?placeName=${placeName}&pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -198,7 +198,7 @@ export const postNewPicture = async function (pictureInfo, file) {
   formData.append("file", file);
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/pictures/${loginCache.getUserId()}`,
+      `http://${API_URL}:${API_PORT}/api/v1/pictures/${loginCache.getUserId()}`,
       {
         method: "POST",
         mode: "cors",
@@ -220,7 +220,7 @@ export const deletePicture = async function (pictureId) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/pictures/${loginCache.getUserId()}/${pictureId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/pictures/${loginCache.getUserId()}/${pictureId}`,
       {
         method: "DELETE",
         mode: "cors",
@@ -239,7 +239,7 @@ export const commentPicture = async function (pictureId, comment) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/pictures/comments/${loginCache.getUserId()}/${pictureId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/pictures/comments/${loginCache.getUserId()}/${pictureId}`,
       {
         method: "POST",
         mode: "cors",
@@ -259,7 +259,7 @@ export const editPictureComment = async function (commentId, editedComment) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/pictures/comments/${loginCache.getUserId()}/${commentId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/pictures/comments/${loginCache.getUserId()}/${commentId}`,
       {
         method: "PUT",
         mode: "cors",
@@ -281,7 +281,7 @@ export const getPictureComments = async function (
 ) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/pictures/comments/${pictureId}?pageStart=${pageStart}&offset=${offset}`,
+      `http://${API_URL}:${API_PORT}/api/v1/pictures/comments/${pictureId}?pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -296,7 +296,7 @@ export const getPictureComments = async function (
 export const getPictureCommentsCount = async function (pictureId) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/pictures/comments/count/${pictureId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/pictures/comments/count/${pictureId}`,
       {
         method: "GET",
         mode: "cors",
@@ -313,7 +313,7 @@ export const deleteComment = async function (commentId) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/pictures/comments/${loginCache.getUserId()}/${commentId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/pictures/comments/${loginCache.getUserId()}/${commentId}`,
       {
         method: "DELETE",
         mode: "cors",
@@ -332,7 +332,7 @@ export const likePicture = async function (pictureId) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/pictures/likes/${loginCache.getUserId()}/${pictureId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/pictures/likes/${loginCache.getUserId()}/${pictureId}`,
       {
         method: "POST",
         mode: "cors",
@@ -349,7 +349,7 @@ export const likePicture = async function (pictureId) {
 export const getPictureLikes = async function (pictureId, pageStart, offset) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/pictures/likes/${pictureId}?pageStart=${pageStart}&offset=${offset}`,
+      `http://${API_URL}:${API_PORT}/api/v1/pictures/likes/${pictureId}?pageStart=${pageStart}&offset=${offset}`,
       {
         method: "GET",
         mode: "cors",
@@ -364,7 +364,7 @@ export const getPictureLikes = async function (pictureId, pageStart, offset) {
 export const getPictureLikesCount = async function (pictureId) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/pictures/likes/count/${pictureId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/pictures/likes/count/${pictureId}`,
       {
         method: "GET",
         mode: "cors",
@@ -381,7 +381,7 @@ export const dislikePicture = async function (pictureId) {
   myHeaders.set("X-XSRF-TOKEN", csrfUtil.getCsrfFromCookies());
   try {
     const response = await fetch(
-      `http://localhost:8080/api/v1/pictures/likes/${loginCache.getUserId()}/${pictureId}`,
+      `http://${API_URL}:${API_PORT}/api/v1/pictures/likes/${loginCache.getUserId()}/${pictureId}`,
       {
         method: "DELETE",
         mode: "cors",

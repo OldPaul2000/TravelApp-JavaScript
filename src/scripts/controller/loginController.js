@@ -6,22 +6,24 @@ LoginView.initHandlers();
 
 LoginView.handleLogin((e) => {
   if (e.key === "Enter" || e.type === "click") {
-    const userEmpty = LoginView.setEmptyUsernameWarn();
-    const passwordEmpty = LoginView.setEmptyPasswordWarn();
-    if (!userEmpty && !passwordEmpty) {
-      const response = login(LoginView.getLoginCredentials());
-      response.then((resp) => {
-        if (LoginControllerUtil.isUsernameNotFoundMessage(resp.message)) {
-          LoginView.setInvalidUsernameWarn();
-        }
-        if (LoginControllerUtil.isInvalidPasswordMessage(resp.message)) {
-          LoginView.setInvalidPasswordWarn();
-        }
-        if (resp.status === 200) {
-          window.location = "index.html";
-        }
-      });
-    }
-    console.log("Login");
+    loginHandler();
   }
 });
+
+const loginHandler = async function () {
+  const userEmpty = LoginView.setEmptyUsernameWarn();
+  const passwordEmpty = LoginView.setEmptyPasswordWarn();
+  if (!userEmpty && !passwordEmpty) {
+    const response = await login(LoginView.getLoginCredentials());
+    if (LoginControllerUtil.isUsernameNotFoundMessage(response.message)) {
+      LoginView.setInvalidUsernameWarn();
+    }
+    if (LoginControllerUtil.isInvalidPasswordMessage(response.message)) {
+      LoginView.setInvalidPasswordWarn();
+    }
+    if (response.status === 200) {
+      window.location = "index.html";
+    }
+  }
+  console.log("Login");
+};

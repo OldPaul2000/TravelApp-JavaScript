@@ -16,31 +16,32 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 90vh;
 }
 
 .register-cassette {
   position: relative;
-  width: 20rem;
-  height: 40rem;
+  width: 22rem;
+  height: 43rem;
   background-color: #fafef9;
   display: grid;
   align-items: center;
   justify-content: center;
   grid-template-columns: 2fr;
   border-radius: 0.8rem;
-  transition: all 0.5s;
   box-shadow: 0 0.1rem 1rem 0.2rem rgba(0, 0, 0, 0.6);
+  transition: all 0.5s;
 }
 
 .register-fields {
-  width: 20rem;
+  width: 22rem;
   height: 40rem;
   display: grid;
   align-items: center;
   justify-content: center;
   row-gap: 1.4rem;
   padding: 2rem;
+  transition: all 0.5s;
 }
 
 /* need to set grid-row grid-column to both elements at the 
@@ -57,9 +58,9 @@
   height: inherit;
   display: flex;
   flex-direction: column;
-  padding-top: 5rem;
-  padding-left: 2.6rem;
-  gap: 2.7rem;
+  padding-top: 6.6rem;
+  padding-left: 3.1rem;
+  gap: 2.73rem;
 }
 
 .input-warnings p {
@@ -78,7 +79,7 @@
 .register-btn {
   font-size: 1.2rem;
   height: 2.4rem;
-  width: 15rem;
+  width: 16rem;
   border: solid 0.1rem #c1c1c1;
   outline: 0;
   border-radius: 0.3rem;

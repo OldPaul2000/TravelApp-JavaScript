@@ -1,0 +1,8 @@
+- Fix date input format displaying problem on mobile and tablet
+ (the mm/dd/yyyy is not displayed on mobile devices, the field is blank)
+ 
+-Solve sluggish image loading problem
+
+-When building UI for phone set the view in devtools to 380x720 px and 75% size
+
+-Make the application single page

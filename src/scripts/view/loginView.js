@@ -80,7 +80,7 @@ class LoginView {
   getLoginCredentials() {
     return {
       username: this.#usernameInput.value,
-      passwrod: this.#passwordInput.value,
+      password: this.#passwordInput.value,
     };
   }
 }
