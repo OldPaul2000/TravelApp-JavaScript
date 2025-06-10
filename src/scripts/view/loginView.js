@@ -8,20 +8,25 @@ class LoginView {
   #INVALID_USERNAME = "Invalid username";
   #INVALID_PASSWORD = "Invalid password";
 
+  #loginContainer = query(".login-container");
+
   #loginFields = query(".login-fields");
-  #usernameWarn = query(".username-warn");
-  #passwordWarn = query(".password-warn");
-  #usernameInput = query(".username");
-  #passwordInput = query(".password");
+  #usernameWarn = query(".login-username-warn");
+  #passwordWarn = query(".login-password-warn");
+  #usernameInput = query(".login-username");
+  #passwordInput = query(".login-password");
   #loginBtn = query(".login-btn");
 
-  removeUserWarn() {
+  #registerLink = query(".register-link");
+  #mainPageLink = query(".main-page-link");
+
+  #removeUserWarn() {
     if (this.#usernameInput.value.length > 0) {
       this.#usernameWarn.textContent = this.#NON_BREAKING_SPACE;
     }
   }
 
-  removePasswordWarn() {
+  #removePasswordWarn() {
     if (this.#passwordInput.value.length > 0) {
       this.#passwordWarn.textContent = this.#NON_BREAKING_SPACE;
     }
@@ -57,13 +62,13 @@ class LoginView {
 
   #handleUsernameInput() {
     this.#usernameInput.addEventListener("input", () => {
-      this.removeUserWarn();
+      this.#removeUserWarn();
     });
   }
 
   #handlePasswordInput() {
     this.#passwordInput.addEventListener("input", () => {
-      this.removePasswordWarn();
+      this.#removePasswordWarn();
     });
   }
 
@@ -72,9 +77,25 @@ class LoginView {
     this.#loginFields.addEventListener("keydown", handler);
   }
 
-  initHandlers() {
-    this.#handleUsernameInput();
-    this.#handlePasswordInput();
+  displayLoginView(display) {
+    if (display) {
+      this.#loginContainer.classList.remove("disp-n");
+    } else {
+      this.#loginContainer.classList.add("disp-n");
+    }
+  }
+
+  #setLinksHandlers() {
+    const registerContainer = query(".register-container");
+    const mainPageContainer = query(".main-page-container");
+    this.#registerLink.addEventListener("click", () => {
+      this.#loginContainer.classList.add("disp-n");
+      registerContainer.classList.remove("disp-n");
+    });
+    this.#mainPageLink.addEventListener("click", () => {
+      this.#loginContainer.classList.add("disp-n");
+      mainPageContainer.classList.remove("disp-n");
+    });
   }
 
   getLoginCredentials() {
@@ -82,6 +103,12 @@ class LoginView {
       username: this.#usernameInput.value,
       password: this.#passwordInput.value,
     };
+  }
+
+  initHandlers() {
+    this.#handleUsernameInput();
+    this.#handlePasswordInput();
+    this.#setLinksHandlers();
   }
 }
 

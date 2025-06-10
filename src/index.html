@@ -11,6 +11,10 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
 
     <link
       rel="stylesheet"
@@ -28,17 +32,160 @@
     <link rel="stylesheet" href="assets/styles/general.css" />
     <link rel="stylesheet" href="assets/styles/main-page-style.css" />
     <link rel="stylesheet" href="assets/styles/main-page-mediaQueries.css" />
+    <link rel="stylesheet" href="assets/styles/login.css" />
+    <link rel="stylesheet" href="assets/styles/login-mediaQueries.css" />
+    <link rel="stylesheet" href="assets/styles/register.css" />
+    <link rel="stylesheet" href="assets/styles/register-mediaQueries.css" />
     <link rel="stylesheet" href="assets/styles/reusable.css" />
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-      rel="stylesheet"
-    />
 
     <script defer type="module" src="./scripts/main.js"></script>
   </head>
+
   <body>
-    <header>
+    <section class="login-container">
+      <img class="login-background-image" src="assets/images/pod-strand.jpg" />
+      <div class="login-main-container">
+        <div class="login-cassette">
+          <div class="logo-container">
+            <p class="logo">Let's Travel</p>
+          </div>
+          <div class="login-fields">
+            <div class="login-input-warnings">
+              <p class="login-username-warn">&nbsp;</p>
+              <p class="login-password-warn">&nbsp;</p>
+            </div>
+            <div class="input-fields">
+              <input
+                class="login-username"
+                type="text"
+                placeholder="Username"
+              />
+              <input
+                class="login-password"
+                type="password"
+                placeholder="Password"
+              />
+              <input class="login-btn" type="button" value="Login" />
+            </div>
+          </div>
+          <div class="cassette-footer">
+            <button class="register-link">Create account</button>
+            <button class="main-page-link">Go to main page</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="register-container disp-n">
+      <img
+        class="register-background-image"
+        src="assets/images/pod-strand.jpg"
+      />
+      <div class="register-main-container">
+        <div class="register-cassette">
+          <p class="register-label">Registration</p>
+          <div class="register-credentials">
+            <div class="register-credentials-1">
+              <div class="register-input-warnings-1">
+                <p class="register-username-warn">Blank</p>
+                <p class="register-password-warn">Blank</p>
+                <p class="repeat-password-warn">Blank</p>
+              </div>
+              <div class="register-fields-1">
+                <input
+                  class="register-username"
+                  placeholder="Username"
+                  type="text"
+                />
+                <input
+                  class="register-password"
+                  placeholder="Password"
+                  type="password"
+                />
+                <input
+                  class="password-repeat"
+                  placeholder="Repeat password"
+                  type="password"
+                />
+                <button class="login-page-link">Login</button>
+              </div>
+            </div>
+            <div class="register-credentials-2">
+              <div class="register-input-warnings-2">
+                <p class="first-name-warn">Blank</p>
+                <p class="last-name-warn">Blank</p>
+                <p class="email-warn">Blank</p>
+                <p class="birth-date-warn">Blank</p>
+              </div>
+              <div class="register-fields-2">
+                <input
+                  class="first-name"
+                  placeholder="First name"
+                  type="text"
+                />
+                <input class="last-name" placeholder="Last name" type="text" />
+                <input class="email" placeholder="Email" type="email" />
+                <div class="birth-date-container">
+                  <a class="birth-date-placeholder">dd/mm/yyyy</a>
+                  <input
+                    class="birth-date"
+                    type="date"
+                    placeholder="dd/mm/yyyy"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="register-btns">
+            <div class="next-register-page-btn-container">
+              <button class="next-register-page-btn">
+                <svg
+                  class="next-register-page-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  fill="#000000"
+                  height="800px"
+                  width="800px"
+                  version="1.1"
+                  id="Layer_1"
+                  viewBox="0 0 512 512"
+                  enable-background="new 0 0 512 512"
+                  xml:space="preserve"
+                >
+                  <polygon
+                    points="512,261.5 298.7,90.8 298.7,218.8 0,218.8 0,304.2 298.7,304.2 298.7,432.2 "
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="prev-page-and-register-btns">
+              <button class="prev-register-page-btn">
+                <svg
+                  class="prev-register-page-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  fill="#000000"
+                  height="800px"
+                  width="800px"
+                  version="1.1"
+                  id="Layer_1"
+                  viewBox="0 0 512 512"
+                  enable-background="new 0 0 512 512"
+                  xml:space="preserve"
+                >
+                  <polygon
+                    points="512,261.5 298.7,90.8 298.7,218.8 0,218.8 0,304.2 298.7,304.2 298.7,432.2 "
+                  />
+                </svg>
+              </button>
+              <input class="register-btn" type="button" value="Register" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="main-page-container disp-n">
       <div class="header-container">
         <div class="first-part">
           <img class="profile-image" src="assets/images/profile-pic.jpg" />
@@ -52,7 +199,21 @@
               placeholder="Find a place"
             />
             <button class="search-btn">
-              <ion-icon class="search-icon" name="search-outline"></ion-icon>
+              <svg
+                class="search-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="800px"
+                height="800px"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
+                  stroke="#000000"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </button>
           </div>
           <button class="menu-btn">
@@ -60,11 +221,12 @@
           </button>
         </div>
       </div>
-    </header>
-    <main>
-      <div class="main-container">
-        <div class="map-container">
-          <div class="map"></div>
+
+      <div class="main-content">
+        <div class="main-container">
+          <div class="map-container">
+            <div class="map"></div>
+          </div>
         </div>
       </div>
     </main>

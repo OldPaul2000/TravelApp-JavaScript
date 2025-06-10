@@ -1,6 +1,9 @@
-const main = document.querySelector(".main-container");
 import { map } from "../scripts/view/map.js";
+import { initializeLoginController } from "./controller/loginController.js";
+import { initializeRegisterController } from "./controller/registerController.js";
 
+initializeLoginController();
+initializeRegisterController();
 map.renderMap();
 
 const loc = async function () {
@@ -18,7 +21,7 @@ const loc = async function () {
   return location;
 };
 
-console.log(loc());
+// console.log(loc());
 
 // loc().then((resp) => {
 //   console.log(resp);

@@ -1,4 +1,3 @@
-import { register } from "../model/user/user";
 import { query } from "../util/query";
 
 class RegisterView {
@@ -9,86 +8,95 @@ class RegisterView {
   #PASSWORD_TOO_SHORT = "At least 8 characters";
   #INVALID_EMAIL_FORMAT = "Invalid email format";
 
-  #usernameWarn = query(".username-warn");
-  #passwordWarn = query(".password-warn");
+  #registerContainer = query(".register-container");
+
+  #usernameWarn = query(".register-username-warn");
+  #passwordWarn = query(".register-password-warn");
   #repeatPasswordWarn = query(".repeat-password-warn");
   #firstNameWarn = query(".first-name-warn");
   #lastNameWarn = query(".last-name-warn");
   #emailWarn = query(".email-warn");
   #birthDateWarn = query(".birth-date-warn");
 
-  #usernameInput = query(".username");
-  #passwordInput = query(".password");
+  #usernameInput = query(".register-username");
+  #passwordInput = query(".register-password");
   #passwordRepeatInput = query(".password-repeat");
   #firstNameInput = query(".first-name");
   #lastNameInput = query(".last-name");
   #emailInput = query(".email");
   #birthDateInput = query(".birth-date");
+  #birthDatePlaceholder = query(".birth-date-placeholder");
 
+  #registerCredentials = query(".register-credentials");
+  #registerBtns = query(".register-btns");
+
+  #nextPageBtn = query(".next-register-page-btn");
+  #prevPageBtn = query(".prev-register-page-btn");
   #registerBtn = query(".register-btn");
 
-  usernameIsBlank = true;
-  passwordIsBlank = true;
-  passwordsMatch = false;
-  firstNameIsBlank = true;
-  lastNameIsBlank = true;
-  emailIsBlank = true;
-  emailFormatIsCorrect = false;
-  birthDateIsBlank = true;
+  #loginLink = query(".login-page-link");
+
+  #usernameIsBlank = true;
+  #passwordIsBlank = true;
+  #passwordsMatch = false;
+  #firstNameIsBlank = true;
+  #lastNameIsBlank = true;
+  #emailIsBlank = true;
+  #emailFormatIsCorrect = false;
+  #birthDateIsBlank = true;
 
   #addValidFieldStyle(element) {
-    element.classList.add("valid-field");
-    element.classList.add("valid-field:focus");
+    element.classList.add("valid-reg-field");
+    element.classList.add("valid-reg-field:focus");
   }
-
   #removeValidFieldStyle(element) {
-    element.classList.remove("valid-field");
-    element.classList.remove("valid-field:focus");
+    element.classList.remove("valid-reg-field");
+    element.classList.remove("valid-reg-field:focus");
   }
 
-  setEmptyUsernameWarn() {
+  #setEmptyUsernameWarn() {
     if (this.#usernameInput.value.length === 0) {
       this.#usernameWarn.textContent = this.#BLANK;
       this.#removeValidFieldStyle(this.#usernameInput);
-      this.usernameIsBlank = true;
+      this.#usernameIsBlank = true;
     } else {
       this.#usernameWarn.textContent = this.#NON_BREAKING_SPACE;
       this.#addValidFieldStyle(this.#usernameInput);
-      this.usernameIsBlank = false;
+      this.#usernameIsBlank = false;
     }
   }
 
   setAlreadyExistingUsernameWarn() {
     this.#usernameWarn.textContent = this.#ALREADY_EXISTING_USERNAME;
-    this.usernameIsBlank = true;
+    this.#usernameIsBlank = true;
   }
 
-  setEmptyPasswordWarn() {
+  #setEmptyPasswordWarn() {
     if (this.#passwordInput.value.length === 0) {
       this.#passwordWarn.textContent = this.#BLANK;
       this.#removeValidFieldStyle(this.#passwordInput);
-      this.passwordIsBlank = true;
+      this.#passwordIsBlank = true;
     } else {
       this.#passwordWarn.textContent = this.#NON_BREAKING_SPACE;
       this.#addValidFieldStyle(this.#passwordInput);
-      this.passwordIsBlank = false;
+      this.#passwordIsBlank = false;
     }
   }
 
-  setPasswordsNotMatchWarn() {
+  #setPasswordsNotMatchWarn() {
     if (this.#passwordInput.value === this.#passwordRepeatInput.value) {
       this.#passwordWarn.textContent = this.#NON_BREAKING_SPACE;
       this.#repeatPasswordWarn.textContent = this.#NON_BREAKING_SPACE;
       this.#addValidFieldStyle(this.#passwordInput);
       this.#addValidFieldStyle(this.#passwordRepeatInput);
-      this.passwordsMatch = true;
+      this.#passwordsMatch = true;
     }
     if (this.#passwordInput.value !== this.#passwordRepeatInput.value) {
       this.#passwordWarn.textContent = this.#PASSWORDS_NOT_MATCHING;
       this.#repeatPasswordWarn.textContent = this.#PASSWORDS_NOT_MATCHING;
       this.#removeValidFieldStyle(this.#passwordInput);
       this.#removeValidFieldStyle(this.#passwordRepeatInput);
-      this.passwordsMatch = false;
+      this.#passwordsMatch = false;
     }
     if (
       this.#passwordInput.value.length === 0 &&
@@ -98,11 +106,11 @@ class RegisterView {
       this.#repeatPasswordWarn.textContent = this.#BLANK;
       this.#removeValidFieldStyle(this.#passwordInput);
       this.#removeValidFieldStyle(this.#passwordRepeatInput);
-      this.passwordsMatch = false;
+      this.#passwordsMatch = false;
     }
   }
 
-  setPasswordTooShortWarn() {
+  #setPasswordTooShortWarn() {
     if (this.#passwordInput.value.length < 8) {
       this.#removeValidFieldStyle(this.#passwordInput);
       this.#passwordWarn.textContent = this.#PASSWORD_TOO_SHORT;
@@ -110,133 +118,143 @@ class RegisterView {
     if (this.#passwordInput.value.length === 0) {
       this.#passwordWarn.textContent = this.#BLANK;
       this.#removeValidFieldStyle(this.#passwordInput);
-      this.passwordIsBlank = true;
+      this.#passwordIsBlank = true;
     }
   }
 
-  setEmptyFirstNameWarn() {
+  #setEmptyFirstNameWarn() {
     if (this.#firstNameInput.value.length === 0) {
       this.#firstNameWarn.textContent = this.#BLANK;
       this.#removeValidFieldStyle(this.#firstNameInput);
-      this.firstNameIsBlank = true;
+      this.#firstNameIsBlank = true;
     } else {
       this.#firstNameWarn.textContent = this.#NON_BREAKING_SPACE;
       this.#addValidFieldStyle(this.#firstNameInput);
-      this.firstNameIsBlank = false;
+      this.#firstNameIsBlank = false;
     }
   }
 
-  setEmptyLastNameWarn() {
+  #setEmptyLastNameWarn() {
     if (this.#lastNameInput.value.length === 0) {
       this.#lastNameWarn.textContent = this.#BLANK;
       this.#removeValidFieldStyle(this.#lastNameInput);
-      this.lastNameIsBlank = true;
+      this.#lastNameIsBlank = true;
     } else {
       this.#lastNameWarn.textContent = this.#NON_BREAKING_SPACE;
       this.#addValidFieldStyle(this.#lastNameInput);
-      this.lastNameIsBlank = false;
+      this.#lastNameIsBlank = false;
     }
   }
 
-  setEmptyEmailWarn() {
+  #setEmptyEmailWarn() {
     if (this.#emailInput.value.length === 0) {
       this.#emailWarn.textContent = this.#BLANK;
       this.#removeValidFieldStyle(this.#lastNameInput);
-      this.emailIsBlank = true;
-      this.emailFormatIsCorrect = false;
+      this.#emailIsBlank = true;
+      this.#emailFormatIsCorrect = false;
     } else {
       this.#emailWarn.textContent = this.#NON_BREAKING_SPACE;
       this.#addValidFieldStyle(this.#lastNameInput);
-      this.emailIsBlank = false;
+      this.#emailIsBlank = false;
     }
   }
 
-  setInvalidEmailWarn() {
+  #setInvalidEmailWarn() {
     const match = this.#emailInput.value.match(
       /[0-9a-zA-z_]+@[0-9a-zA-z_]+\.[a-z]+/
     );
-    this.setEmptyEmailWarn();
-    if (!this.emailIsBlank) {
+    this.#setEmptyEmailWarn();
+    if (!this.#emailIsBlank) {
       if (match) {
         this.#emailWarn.textContent = this.#NON_BREAKING_SPACE;
         this.#addValidFieldStyle(this.#emailInput);
-        this.emailFormatIsCorrect = true;
-        this.emailIsBlank = false;
+        this.#emailFormatIsCorrect = true;
+        this.#emailIsBlank = false;
       } else {
         this.#emailWarn.textContent = this.#INVALID_EMAIL_FORMAT;
         this.#removeValidFieldStyle(this.#emailInput);
-        this.emailFormatIsCorrect = false;
+        this.#emailFormatIsCorrect = false;
       }
     }
   }
 
-  setEmptyBirthDateWarn() {
+  #setEmptyBirthDateWarn() {
     const date = this.#birthDateInput.value;
     const year = date.slice(0, 4);
     if (year.startsWith("1") || year.startsWith("2")) {
       this.#birthDateWarn.textContent = this.#NON_BREAKING_SPACE;
       this.#addValidFieldStyle(this.#birthDateInput);
-      this.birthDateIsBlank = false;
+      this.#birthDateIsBlank = false;
     } else {
       this.#birthDateWarn.textContent = this.#BLANK;
       this.#removeValidFieldStyle(this.#birthDateInput);
-      this.birthDateIsBlank = true;
+      this.#birthDateIsBlank = true;
     }
   }
 
-  handleEmptyUsername() {
+  #handleEmptyUsername() {
     this.#usernameInput.addEventListener("input", () => {
-      this.setEmptyUsernameWarn();
+      this.#setEmptyUsernameWarn();
     });
   }
 
-  handleInvalidPassword() {
+  #handleInvalidPassword() {
     this.#passwordInput.addEventListener("input", () => {
-      this.setEmptyPasswordWarn();
-      this.setPasswordsNotMatchWarn();
-      this.setPasswordTooShortWarn();
+      this.#setEmptyPasswordWarn();
+      this.#setPasswordsNotMatchWarn();
+      this.#setPasswordTooShortWarn();
     });
 
     this.#passwordRepeatInput.addEventListener("input", () => {
-      this.setEmptyPasswordWarn();
-      this.setPasswordsNotMatchWarn();
+      this.#setEmptyPasswordWarn();
+      this.#setPasswordsNotMatchWarn();
     });
   }
 
-  handleEmptyFirstName() {
+  #handleEmptyFirstName() {
     this.#firstNameInput.addEventListener("input", () => {
-      this.setEmptyFirstNameWarn();
+      this.#setEmptyFirstNameWarn();
     });
   }
 
-  handleEmptyLastName() {
+  #handleEmptyLastName() {
     this.#lastNameInput.addEventListener("input", () => {
-      this.setEmptyLastNameWarn();
+      this.#setEmptyLastNameWarn();
     });
   }
 
-  handleInvalidEmail() {
+  #handleInvalidEmail() {
     this.#emailInput.addEventListener("input", () => {
-      this.setInvalidEmailWarn();
+      this.#setInvalidEmailWarn();
     });
   }
 
-  handleEmptyBirthDate() {
+  #handleEmptyBirthDate() {
     this.#birthDateInput.addEventListener("input", () => {
-      this.setEmptyBirthDateWarn();
+      this.#setEmptyBirthDateWarn();
+    });
+  }
+  #handleHideBirthDatePlaceholder() {
+    this.#birthDateInput.addEventListener("input", () => {
+      if (!this.#birthDatePlaceholder.classList.contains("disp-n")) {
+        this.#birthDatePlaceholder.classList.add("disp-n");
+      }
+      if (this.#birthDateInput.value.length === 0) {
+        this.#birthDatePlaceholder.classList.remove("disp-n");
+      }
     });
   }
 
   fieldsAreValid() {
     return (
-      !this.usernameIsBlank &&
-      !this.passwordIsBlank &&
-      this.passwordsMatch &&
-      !this.firstNameIsBlank &&
-      !this.lastNameIsBlank &&
-      !this.emailIsBlank &&
-      this.emailFormatIsCorrect &&
-      !this.birthDateIsBlank
+      !this.#usernameIsBlank &&
+      !this.#passwordIsBlank &&
+      this.#passwordsMatch &&
+      !this.#firstNameIsBlank &&
+      !this.#lastNameIsBlank &&
+      !this.#emailIsBlank &&
+      this.#emailFormatIsCorrect &&
+      !this.#birthDateIsBlank
     );
   }
 
@@ -251,18 +269,32 @@ class RegisterView {
   }
 
   resetFieldsValidityValues() {
-    this.usernameIsBlank = true;
-    this.passwordIsBlank = true;
-    this.passwordsMatch = false;
-    this.firstNameIsBlank = true;
-    this.lastNameIsBlank = true;
-    this.emailIsBlank = true;
-    this.emailFormatIsCorrect = false;
-    this.birthDateIsBlank = true;
+    this.#usernameIsBlank = true;
+    this.#passwordIsBlank = true;
+    this.#passwordsMatch = false;
+    this.#firstNameIsBlank = true;
+    this.#lastNameIsBlank = true;
+    this.#emailIsBlank = true;
+    this.#emailFormatIsCorrect = false;
+    this.#birthDateIsBlank = true;
+  }
+
+  slideToFirstPage() {
+    this.#registerCredentials.classList.remove("slide-register-page");
+    this.#registerBtns.classList.remove("slide-register-page");
   }
 
   handleRegister(handler) {
-    this.#registerBtn.addEventListener("click", handler);
+    this.#registerBtn.addEventListener("click", () => {
+      handler();
+      if (
+        this.#usernameIsBlank ||
+        this.#passwordIsBlank ||
+        !this.#passwordsMatch
+      ) {
+        this.slideToFirstPage();
+      }
+    });
   }
 
   getInputCredentials() {
@@ -279,13 +311,44 @@ class RegisterView {
     };
   }
 
+  displayRegisterView(display) {
+    if (display) {
+      this.#registerContainer.classList.remove("disp-n");
+    } else {
+      this.#registerContainer.classList.add("disp-n");
+    }
+  }
+
+  #setPageSlideHandler() {
+    this.#nextPageBtn.addEventListener("click", () => {
+      this.#registerCredentials.classList.add("slide-register-page");
+      this.#registerBtns.classList.add("slide-register-page");
+    });
+    this.#prevPageBtn.addEventListener("click", () => {
+      this.#registerCredentials.classList.remove("slide-register-page");
+      this.#registerBtns.classList.remove("slide-register-page");
+    });
+  }
+
+  #handleGoToLoginPage() {
+    const loginPage = query(".login-container");
+    const registerPage = query(".register-container");
+    this.#loginLink.addEventListener("click", () => {
+      registerPage.classList.add("disp-n");
+      loginPage.classList.remove("disp-n");
+    });
+  }
+
   initHandlers() {
-    this.handleEmptyUsername();
-    this.handleInvalidPassword();
-    this.handleEmptyFirstName();
-    this.handleEmptyLastName();
-    this.handleInvalidEmail();
-    this.handleEmptyBirthDate();
+    this.#handleEmptyUsername();
+    this.#handleInvalidPassword();
+    this.#handleEmptyFirstName();
+    this.#handleEmptyLastName();
+    this.#handleInvalidEmail();
+    this.#handleEmptyBirthDate();
+    this.#handleHideBirthDatePlaceholder();
+    this.#setPageSlideHandler();
+    this.#handleGoToLoginPage();
   }
 }
 

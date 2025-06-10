@@ -1,56 +1,22 @@
-/* Phones */
-@media (min-width: 30em) and (orientation: portrait) {
-  .register-cassette {
-    width: 23rem;
-    height: 44rem;
-  }
-
-  .register-fields {
-    width: 23rem;
-    height: 44rem;
-  }
-
-  .input-warnings {
-    padding-top: 5rem;
-    padding-left: 3.1rem;
-    gap: 3.13rem;
-  }
-
-  .input-warnings p {
-    font-size: 1.3rem;
-  }
-
-  .username,
-  .password,
-  .password-repeat,
-  .first-name,
-  .last-name,
-  .email,
-  .birth-date,
-  .register-btn {
-    width: 17rem;
-    height: 2.8rem;
-  }
-}
-
-/* Phones */
+/* Phones-landscape mode */
 @media (min-width: 30em) and (orientation: landscape) {
-  .main-container {
+  .register-container {
     height: 150vh;
+    align-items: center;
   }
 
-  .background-image {
+  .register-background-image {
     height: inherit;
   }
 }
 
 /* Tablets and desktop */
 @media (min-width: 65rem) and (orientation: landscape) {
-  .main-container {
+  .register-main-container {
     height: 100vh;
   }
 
-  .input-warnings {
+  .register-input-warnings {
     padding-top: 6.5rem;
     padding-left: 3.1rem;
     gap: 2.7rem;

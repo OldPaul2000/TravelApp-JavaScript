@@ -1,28 +1,49 @@
-.background-image {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  filter: brightness(0.9);
+.login-container {
+  --login-cassette-bg-color: #fafef990;
+  --login-cassette-border-color: #c1c1c1;
+  --logo-font-color: #333232;
+  --input-warnings-font-color: #7f5f23;
+  --user-pass-bg-color: #c1c1c199;
+  --user-pass-font-color: #333232;
+  --user-pass-border-color: #f0f0f0;
+  --login-credentials-focus-border-color: #f0f0f0;
+  --login-btn-bg-color: #464746;
+  --login-btn-font-color: #cacaca;
+  --login-btn-hover-border-color: #c1c1c1;
+  --cassette-footer-links-font-color: #474747;
 }
 
-.main-container {
+.login-container {
+  display: flex;
+  justify-content: center;
+}
+
+.login-main-container {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 90vh;
 }
 
+.login-background-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  filter: brightness(0.9) blur(0.15rem);
+}
+
 .login-cassette {
+  background-color: var(--login-cassette-bg-color);
   position: relative;
   width: 20rem;
-  height: 32rem;
-  padding: 1rem 0;
-  background-color: #fafef9;
+  height: 33.4rem;
+  padding: 1.6rem 0 1.4rem 0;
   display: grid;
   justify-items: center;
   align-items: center;
   grid-template-columns: 2fr;
-  border-radius: 0.8rem;
+  border-radius: 1.4rem;
+  border: solid 0.2rem var(--login-cassette-border-color);
   transition: all 0.5s;
   box-shadow: 0 0.1rem 1rem 0.2rem rgba(0, 0, 0, 0.6);
 }
@@ -37,9 +58,9 @@
 }
 
 .logo {
+  color: var(--logo-font-color);
   font-family: Pacifico;
-  font-size: 2.6rem;
-  color: #333232;
+  font-size: 2.8rem;
   text-align: center;
 }
 
@@ -54,13 +75,17 @@
   gap: 2.4rem;
 }
 
+.login-fields {
+  margin-bottom: 3.2rem;
+}
+
 .input-fields,
-.input-warnings {
+.login-input-warnings {
   grid-row: 1 / -1;
   grid-column: 1 / -1;
 }
 
-.input-warnings {
+.login-input-warnings {
   width: 100%;
   height: 100%;
   margin-bottom: 4rem;
@@ -69,81 +94,76 @@
   gap: 2rem;
 }
 
-.input-warnings p {
+.login-input-warnings p {
+  color: var(--input-warnings-font-color);
   display: block;
   font-size: 1.4rem;
   font-family: Roboto;
-  color: #ff3434;
 }
 
-.username-warn {
-  margin-bottom: 3.3rem;
+.login-username-warn {
+  margin-bottom: 3.4rem;
 }
 
-.username,
-.password {
+.login-username,
+.login-password {
+  background-color: var(--user-pass-bg-color);
+  color: var(--user-pass-font-color);
   font-size: 1.2rem;
   width: 15rem;
   height: 2.6rem;
-  border: solid 0.1rem #c1c1c1;
+  border-radius: 0.4rem;
+  border: solid 0.1rem var(--user-pass-border-color);
   outline: 0;
-  border-radius: 0.3rem;
-  padding: 0 0.5rem 0 0.5rem;
+  padding: 0.2rem 0.5rem 0 0.5rem;
   box-shadow: 0.2rem 0.3rem 1rem rgba(0, 0, 0, 0.1);
-  color: #333333;
 }
 
-.username:focus,
-.password:focus,
+.login-username:focus,
+.login-password:focus,
 .login-btn:focus {
-  border: solid 0.2rem #c1c1c1;
+  border: solid 0.2rem var(--login-credentials-focus-border-color);
 }
 
-.username::placeholder,
-.password::placeholder {
+.login-btn:focus {
+  border: solid 0.1rem var(--login-credentials-focus-border-color);
+}
+
+.login-username::placeholder,
+.login-password::placeholder {
   font-size: 1.4rem;
 }
 
 .login-btn {
-  background-color: rgba(134, 136, 138, 0.3);
+  background-color: var(--login-btn-bg-color);
+  color: var(--login-btn-font-color);
   font-size: 1.3rem;
   font-family: Roboto;
-  width: 6rem;
+  width: 7rem;
   height: 2.4rem;
   border: none;
-  border-radius: 0.3rem;
+  border-radius: 0.4rem;
   outline: 0;
   transition: box-shadow 0.1s;
 }
 
 .login-btn:hover {
-  border: solid 0.1rem #c1c1c1;
-  box-shadow: 0 0 1rem rgba(35, 35, 35, 0.2);
+  box-shadow: 0 0 1rem rgba(30, 24, 24, 0.2);
 }
 
 .cassette-footer {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.6rem;
   align-items: center;
 }
 
-.main-page,
-.register {
+.main-page-link,
+.register-link {
+  background-color: transparent;
+  color: var(--cassette-footer-links-font-color);
   font-family: Roboto;
   font-size: 1.2rem;
-  color: #2b2b2b;
-  outline: 0;
-}
-
-.main-page:focus,
-.register:focus {
-  color: rgb(115, 115, 115);
-}
-
-.main-page:link,
-.register:link {
-  font-family: Roboto;
-  font-size: 1.35rem;
-  color: #2b2b2b;
+  border: none;
+  outline: none;
 }

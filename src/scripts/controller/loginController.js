@@ -1,14 +1,7 @@
 import LoginView from "../view/loginView";
+import MainPageView from "../view/mainPageView";
 import { login } from "../model/user/user";
 import * as LoginControllerUtil from "../util/loginControllerUtil";
-
-LoginView.initHandlers();
-
-LoginView.handleLogin((e) => {
-  if (e.key === "Enter" || e.type === "click") {
-    loginHandler();
-  }
-});
 
 const loginHandler = async function () {
   const userEmpty = LoginView.setEmptyUsernameWarn();
@@ -22,8 +15,19 @@ const loginHandler = async function () {
       LoginView.setInvalidPasswordWarn();
     }
     if (response.status === 200) {
-      window.location = "index.html";
+      LoginView.displayLoginView(false);
+      MainPageView.displayMainPage(true);
     }
   }
   console.log("Login");
+};
+
+export const initializeLoginController = function () {
+  LoginView.initHandlers();
+
+  LoginView.handleLogin((e) => {
+    if (e.key === "Enter" || e.type === "click") {
+      loginHandler();
+    }
+  });
 };

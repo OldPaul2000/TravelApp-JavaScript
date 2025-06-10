@@ -1,62 +1,18 @@
-/* Phones */
-@media (min-width: 30em) and (orientation: portrait) {
-  .main-container {
-    height: 100vh;
+/* Phones-landscape */
+@media (min-width: 30em) and (orientation: landscape) {
+  .login-container {
+    height: 150vh;
+    align-items: center;
   }
 
-  .login-cassette {
-    width: 23rem;
-    height: 35rem;
-  }
-
-  .logo-container {
-    margin-bottom: 1.2rem;
-  }
-
-  .logo {
-    font-size: 3rem;
-  }
-
-  .input-warnings {
-    padding-top: 0.2rem;
-    margin-bottom: 4rem;
-  }
-
-  .input-warnings p {
-    font-size: 1.6rem;
-  }
-
-  .username-warn {
-    margin-bottom: 3.7rem;
-  }
-
-  .username,
-  .password {
-    width: 17rem;
-    height: 3.2rem;
-    font-size: 1.3rem;
-  }
-
-  .username::placeholder,
-  .password::placeholder {
-    font-size: 1.4rem;
-  }
-
-  .login-btn {
-    font-size: 1.6rem;
-    width: 7rem;
-    height: 3rem;
-  }
-
-  .main-page:link,
-  .register:link {
-    font-size: 1.6rem;
+  .login-background-image {
+    height: inherit;
   }
 }
 
-/* Tablets */
+/* Tablets-portrait */
 @media (min-width: 45em) and (orientation: portrait) {
-  .main-container {
+  .login-container {
     height: 100vh;
   }
 
@@ -69,17 +25,17 @@
     font-size: 3.4rem;
   }
 
-  .input-warnings {
+  .login-input-warnings {
     padding-top: 0.2rem;
     margin-bottom: 4rem;
   }
 
-  .input-warnings p {
+  .login-input-warnings p {
     font-size: 1.6rem;
   }
 
-  .username,
-  .password {
+  .login-username,
+  .login-password {
     width: 19rem;
     height: 3.4rem;
     font-size: 1.6rem;
@@ -97,20 +53,9 @@
   }
 }
 
-/* Phones */
-@media (min-width: 30em) and (orientation: landscape) {
-  .main-container {
-    height: 150vh;
-  }
-
-  .background-image {
-    height: inherit;
-  }
-}
-
-/* Tablets */
+/* Tablets-landscape */
 @media (min-width: 65em) and (orientation: landscape) {
-  .main-container {
+  .login-container {
     height: 100vh;
   }
 }

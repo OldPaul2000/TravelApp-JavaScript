@@ -1,18 +1,35 @@
-.register-label {
-  font-family: Roboto;
-  font-size: 2rem;
-  color: #333333;
-  border-bottom: solid 0.1rem #b5b5b5;
+.register-container {
+  --register-label-color: #333333;
+  --register-label-border-color: #b5b5b5;
+  --register-cassette-bg-color: #fafef990;
+  --register-cassette-border-color: #c1c1c1;
+  --input-warnings-font-color: #654916;
+  --register-fields-bg-color: #c1c1c199;
+  --register-fields-font-color: #333232;
+  --register-fields-border-color: #f0f0f0;
+  --valid-field-border-color: #97ab86;
+  --register-btn-bg-color: #464746;
+  --register-btn-font-color: #cacaca;
+  --register-fields-focus-border-color: #f0f0f0;
+  --btns-bg-color: #464746;
+  --btns-font-color: #cacaca;
+  --login-page-link-font-color: #474747;
+  --next-page-register-btns-border-color: #c1c1c1;
 }
 
-.background-image {
+.register-container {
+  display: flex;
+  justify-content: center;
+}
+
+.register-background-image {
   width: 100%;
   height: 100%;
   position: absolute;
-  filter: brightness(0.9);
+  filter: brightness(0.9) blur(0.15rem);
 }
 
-.main-container {
+.register-main-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,105 +37,265 @@
 }
 
 .register-cassette {
+  background-color: var(--register-cassette-bg-color);
   position: relative;
-  width: 22rem;
-  height: 43rem;
-  background-color: #fafef9;
-  display: grid;
-  align-items: center;
-  justify-content: center;
-  grid-template-columns: 2fr;
-  border-radius: 0.8rem;
+  width: 20rem;
+  /* height: 32rem; */
+  height: 33.4rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.4rem;
+  border: solid 0.2rem var(--register-cassette-border-color);
   box-shadow: 0 0.1rem 1rem 0.2rem rgba(0, 0, 0, 0.6);
   transition: all 0.5s;
+  overflow: hidden;
 }
 
-.register-fields {
-  width: 22rem;
-  height: 40rem;
+.register-label {
+  color: var(--register-label-color);
+  font-family: Roboto;
+  font-size: 2rem;
+  width: 100%;
+  height: 3rem;
+  padding: 0.8rem 0 2.4rem 1.2rem;
+  border-bottom: solid 0.1rem var(--register-label-border-color);
+}
+
+.register-credentials {
+  width: 200%;
+  height: 100%;
+  display: flex;
+  padding-left: 1.8rem;
+  gap: 3.6rem;
+  transition: transform 0.5s;
+}
+
+.register-btns {
+  width: 200%;
+  height: 3.6rem;
+  display: flex;
+  overflow: hidden;
+  transition: transform 0.5s;
+}
+
+/* =========================================== REGISTER PAGE 1 =========================================== */
+
+.register-credentials-1 {
   display: grid;
+  grid-template-rows: 2fr;
+  grid-template-columns: 2fr;
+  font-family: Roboto;
+}
+
+.register-input-warnings-1 {
+  color: var(--input-warnings-font-color);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 4.4rem;
+  padding: 4.4rem 0 0 0.2rem;
+}
+
+.register-input-warnings-1 p {
+  font-size: 1.2rem;
+}
+
+.register-fields-1 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  row-gap: 1.4rem;
-  padding: 2rem;
+  gap: 3.2rem;
   transition: all 0.5s;
 }
 
-/* need to set grid-row grid-column to both elements at the 
-   same time in order to make css understand
-   that we want to overlap elements in a grid */
-.register-fields,
-.input-warnings {
+.register-input-warnings-1,
+.register-fields-1 {
+  grid-row: 1/-1;
+  grid-column: 1/ -1;
+}
+
+.next-register-page-btn-container {
+  display: flex;
+  height: 3rem;
+}
+
+.next-register-page-btn {
+  background-color: var(--btns-bg-color);
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding-top: 0.2rem;
+  border-top: solid 0.2rem var(--next-page-register-btns-border-color);
+}
+
+.next-register-page-icon {
+  fill: var(--btns-font-color);
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.login-page-link {
+  background-color: transparent;
+  color: var(--login-page-link-font-color);
+  text-align: center;
+  font-family: Roboto;
+  font-size: 1.6rem;
+  position: absolute;
+  top: 85%;
+  font-family: Roboto;
+  font-size: 1.2rem;
+  border: none;
+  outline: none;
+}
+/* =========================================== REGISTER PAGE 1 =========================================== */
+/* =========================================== REGISTER PAGE 2 =========================================== */
+
+.register-credentials-2 {
+  display: grid;
+  grid-template-rows: 2fr;
+  grid-template-columns: 2fr;
+  font-family: Roboto;
+}
+
+.register-input-warnings-2 {
+  color: var(--input-warnings-font-color);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 4.4rem;
+  padding: 1.5rem 0 0 0.2rem;
+}
+
+.register-input-warnings-2 p {
+  font-size: 1.2rem;
+}
+
+.register-fields-2 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3.2rem;
+  transition: all 0.5s;
+}
+
+.birth-date-container {
+  display: grid;
+  align-items: center;
+}
+
+.birth-date-placeholder {
+  font-family: Roboto;
+  font-size: 1.4rem;
+  margin-left: 1rem;
+}
+
+.birth-date-placeholder,
+.birth-date {
+  grid-row: 1 / -1;
+  grid-column: 1 /-1;
+}
+
+.register-input-warnings-2,
+.register-fields-2 {
   grid-row: 1 / -1;
   grid-column: 1 / -1;
 }
 
-.input-warnings {
-  width: 20rem;
-  height: inherit;
+.prev-register-page-btn,
+.register-btn {
+  background-color: var(--btns-bg-color);
+  width: 100%;
+  border: none;
+  outline: none;
+  border-top: solid 0.2rem var(--next-page-register-btns-border-color);
+  border-right: solid 0.1rem var(--next-page-register-btns-border-color);
+}
+
+.register-btn {
+  color: var(--btns-font-color);
+  border-left: solid 0.1rem var(--next-page-register-btns-border-color);
+  border-right: none;
+}
+
+.register-btn:hover {
+  box-shadow: 0 0 1rem rgba(35, 35, 35, 0.2);
+}
+
+.next-register-page-btn-container {
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  padding-top: 6.6rem;
-  padding-left: 3.1rem;
-  gap: 2.73rem;
 }
 
-.input-warnings p {
-  font-size: 1.2rem;
-  font-family: Roboto;
-  color: #fc1b1b;
+.prev-page-and-register-btns {
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
 
-.username,
-.password,
+.prev-register-page-btn {
+  padding-top: 0.2rem;
+}
+
+.prev-register-page-icon {
+  fill: var(--btns-font-color);
+  width: 2.2rem;
+  height: 2.2rem;
+  transform: rotate(-180deg);
+}
+
+/* =========================================== REGISTER PAGE 2 =========================================== */
+
+.slide-register-page {
+  transform: translateX(-50%);
+}
+
+.valid-reg-field {
+  border: solid 0.2rem var(--valid-field-border-color);
+}
+.valid-reg-field:focus {
+  border: solid 0.2rem var(--valid-field-border-color) !important;
+}
+
+.register-username,
+.register-password,
 .password-repeat,
 .first-name,
 .last-name,
 .email,
-.birth-date,
-.register-btn {
+.birth-date {
+  background-color: var(--register-fields-bg-color);
+  color: var(--register-fields-font-color);
   font-size: 1.2rem;
-  height: 2.4rem;
   width: 16rem;
-  border: solid 0.1rem #c1c1c1;
+  height: 2.6rem;
+  border-radius: 0.4rem;
+  border: solid 0.1rem var(--register-fields-border-color);
   outline: 0;
-  border-radius: 0.3rem;
   padding: 0 0.5rem 0 0.5rem;
   box-shadow: 0.2rem 0.3rem 1rem rgba(0, 0, 0, 0.1);
-  color: #333333;
 }
 
-.valid-field {
-  border: solid 0.2rem rgba(56, 195, 54, 0.8);
-}
-.valid-field:focus {
-  border: solid 0.2rem rgba(56, 195, 54, 0.8) !important;
-}
-
-.register-btn {
-  background-color: rgba(134, 136, 138, 0.3);
-  color: black;
-  font-family: Roboto;
-  font-size: 1.3rem;
-  height: 2.4rem;
-  border: none;
-  border-radius: 0.3rem;
-  outline: 0;
-  transition: box-shadow 0.1s;
-}
-
-.register-btn:hover {
-  border: solid 0.1rem #c1c1c1;
-  box-shadow: 0 0 1rem rgba(35, 35, 35, 0.2);
-}
-
-.username:focus,
-.password:focus,
+.register-username:focus,
+.register-password:focus,
 .password-repeat:focus,
 .first-name:focus,
 .last-name:focus,
 .email:focus,
-.birth-date:focus,
-.register-btn:focus {
-  border: solid 0.2rem #c1c1c1;
+.birth-date:focus {
+  border: solid 0.2rem var(--register-fields-focus-border-color);
 }
