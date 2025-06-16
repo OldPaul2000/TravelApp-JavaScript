@@ -1,9 +1,6 @@
-.app-main-container {
-  overflow: hidden;
-}
-
 .main-page-container {
-  height: 94vh;
+  height: 93vh;
+  position: relative;
   display: grid;
   grid-template-rows: 6.2rem 1fr 5.2rem;
   overflow: hidden;
