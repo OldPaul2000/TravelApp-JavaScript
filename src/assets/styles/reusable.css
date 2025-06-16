@@ -1,3 +1,23 @@
 .disp-n {
   display: none;
 }
+
+.hide-take-p {
+  transform: translateY(100%);
+}
+
+.hide-feed {
+  transform: translateX(-100%);
+}
+
+.show-my-pics {
+  transform: translateX(-100%);
+}
+
+.show-profile-options {
+  transform: translateX(0);
+}
+
+.show-app-menu {
+  transform: translateX(0);
+}

@@ -1,28 +1,15 @@
-import { map } from "../scripts/view/map.js";
 import { initializeLoginController } from "./controller/loginController.js";
 import { initializeRegisterController } from "./controller/registerController.js";
+import ProfileOptionsController from "./controller/profileOptionsController.js";
+import AppMenuController from "./controller/appMenuController.js";
+import FeedController from "./controller/feedController.js";
+import TakePictureController from "./controller/takePictureController.js";
+import MyPicturesController from "./controller/myPicturesController.js";
 
 initializeLoginController();
 initializeRegisterController();
-map.renderMap();
-
-const loc = async function () {
-  const promise = new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition((pos) => {
-      resolve({
-        latitude: pos.coords.latitude,
-        longitude: pos.coords.longitude,
-      });
-    });
-    (error) => reject(error);
-  });
-
-  const location = await promise;
-  return location;
-};
-
-// console.log(loc());
-
-// loc().then((resp) => {
-//   console.log(resp);
-// });
+ProfileOptionsController.initialize();
+AppMenuController.initialize();
+FeedController.initialize();
+TakePictureController.initialize();
+MyPicturesController.initialize();

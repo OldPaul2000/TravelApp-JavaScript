@@ -1,0 +1,10 @@
+-Implement ajust profile picture scale(based on its natural height)
+-When the user presses the search bar the map will be displayed
+ and the location view will be updated based on user input
+-Fix overflow content scroll in main page(when profile-options-container and app-menu-container are present in the html page
+ the user can scroll up the page and take-picture-container element is visible but the user shouldn't be able to scroll
+ the page)
+-Set views functionality in the proper view class:
+ e.g: the methods for changing state of feedView and myPicturesView are written in the footerView
+      but they should be written in the feedView and myPicturesView and only the buttons listeners
+      should be added in footerView(There are buttons which help access the views mentioned above)       

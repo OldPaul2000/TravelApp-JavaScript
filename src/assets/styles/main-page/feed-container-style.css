@@ -1,0 +1,12 @@
+.feed-container {
+  width: 100%;
+  overflow-y: scroll;
+  transition: transform 0.3s ease-in;
+}
+
+.feed-content {
+  background-color: red;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}

@@ -360,10 +360,12 @@ class $01661bfb904286b0$var$LoginView {
     #usernameInput = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".login-username");
     #passwordInput = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".login-password");
     #loginBtn = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".login-btn");
-    removeUserWarn() {
+    #registerLink = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".register-link");
+    #mainPageLink = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".main-page-link");
+    #removeUserWarn() {
         if (this.#usernameInput.value.length > 0) this.#usernameWarn.textContent = this.#NON_BREAKING_SPACE;
     }
-    removePasswordWarn() {
+    #removePasswordWarn() {
         if (this.#passwordInput.value.length > 0) this.#passwordWarn.textContent = this.#NON_BREAKING_SPACE;
     }
     setEmptyUsernameWarn() {
@@ -392,12 +394,12 @@ class $01661bfb904286b0$var$LoginView {
     }
     #handleUsernameInput() {
         this.#usernameInput.addEventListener("input", ()=>{
-            this.removeUserWarn();
+            this.#removeUserWarn();
         });
     }
     #handlePasswordInput() {
         this.#passwordInput.addEventListener("input", ()=>{
-            this.removePasswordWarn();
+            this.#removePasswordWarn();
         });
     }
     handleLogin(handler) {
@@ -408,15 +410,28 @@ class $01661bfb904286b0$var$LoginView {
         if (display) this.#loginContainer.classList.remove("disp-n");
         else this.#loginContainer.classList.add("disp-n");
     }
-    initHandlers() {
-        this.#handleUsernameInput();
-        this.#handlePasswordInput();
+    #setLinksHandlers() {
+        const registerContainer = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".register-container");
+        const mainPageContainer = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".main-page-container");
+        this.#registerLink.addEventListener("click", ()=>{
+            this.#loginContainer.classList.add("disp-n");
+            registerContainer.classList.remove("disp-n");
+        });
+        this.#mainPageLink.addEventListener("click", ()=>{
+            this.#loginContainer.classList.add("disp-n");
+            mainPageContainer.classList.remove("disp-n");
+        });
     }
     getLoginCredentials() {
         return {
             username: this.#usernameInput.value,
             password: this.#passwordInput.value
         };
+    }
+    initHandlers() {
+        this.#handleUsernameInput();
+        this.#handlePasswordInput();
+        this.#setLinksHandlers();
     }
 }
 var $01661bfb904286b0$export$2e2bcd8739ae039 = new $01661bfb904286b0$var$LoginView();
@@ -425,9 +440,16 @@ var $01661bfb904286b0$export$2e2bcd8739ae039 = new $01661bfb904286b0$var$LoginVi
 
 class $13183c674aedf1ed$var$MainPageView {
     #mainPageContainer = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".main-page-container");
+    #profilePicture = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".profile-picture");
     displayMainPage(display) {
         if (display) this.#mainPageContainer.classList.remove("disp-n");
         else this.#mainPageContainer.classList.add("disp-n");
+    }
+    getProfilePictureHeight() {
+        return this.#profilePicture.naturalHeight;
+    }
+    sayHello() {
+        console.log("Hello");
     }
 }
 var $13183c674aedf1ed$export$2e2bcd8739ae039 = new $13183c674aedf1ed$var$MainPageView();
@@ -470,7 +492,6 @@ const $019d5de0aed9d37f$export$81ea6467782f4df = function() {
 
 
 
-
 class $a8765a910c4e806a$var$RegisterView {
     #NON_BREAKING_SPACE = "\u00A0";
     #BLANK = "Blank";
@@ -493,73 +514,79 @@ class $a8765a910c4e806a$var$RegisterView {
     #lastNameInput = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".last-name");
     #emailInput = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".email");
     #birthDateInput = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".birth-date");
+    #birthDatePlaceholder = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".birth-date-placeholder");
+    #registerCredentials = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".register-credentials");
+    #registerBtns = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".register-btns");
+    #nextPageBtn = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".next-register-page-btn");
+    #prevPageBtn = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".prev-register-page-btn");
     #registerBtn = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".register-btn");
-    usernameIsBlank = true;
-    passwordIsBlank = true;
-    passwordsMatch = false;
-    firstNameIsBlank = true;
-    lastNameIsBlank = true;
-    emailIsBlank = true;
-    emailFormatIsCorrect = false;
-    birthDateIsBlank = true;
+    #loginLink = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".login-page-link");
+    #usernameIsBlank = true;
+    #passwordIsBlank = true;
+    #passwordsMatch = false;
+    #firstNameIsBlank = true;
+    #lastNameIsBlank = true;
+    #emailIsBlank = true;
+    #emailFormatIsCorrect = false;
+    #birthDateIsBlank = true;
     #addValidFieldStyle(element) {
-        element.classList.add("valid-field");
-        element.classList.add("valid-field:focus");
+        element.classList.add("valid-reg-field");
+        element.classList.add("valid-reg-field:focus");
     }
     #removeValidFieldStyle(element) {
-        element.classList.remove("valid-field");
-        element.classList.remove("valid-field:focus");
+        element.classList.remove("valid-reg-field");
+        element.classList.remove("valid-reg-field:focus");
     }
-    setEmptyUsernameWarn() {
+    #setEmptyUsernameWarn() {
         if (this.#usernameInput.value.length === 0) {
             this.#usernameWarn.textContent = this.#BLANK;
             this.#removeValidFieldStyle(this.#usernameInput);
-            this.usernameIsBlank = true;
+            this.#usernameIsBlank = true;
         } else {
             this.#usernameWarn.textContent = this.#NON_BREAKING_SPACE;
             this.#addValidFieldStyle(this.#usernameInput);
-            this.usernameIsBlank = false;
+            this.#usernameIsBlank = false;
         }
     }
     setAlreadyExistingUsernameWarn() {
         this.#usernameWarn.textContent = this.#ALREADY_EXISTING_USERNAME;
-        this.usernameIsBlank = true;
+        this.#usernameIsBlank = true;
     }
-    setEmptyPasswordWarn() {
+    #setEmptyPasswordWarn() {
         if (this.#passwordInput.value.length === 0) {
             this.#passwordWarn.textContent = this.#BLANK;
             this.#removeValidFieldStyle(this.#passwordInput);
-            this.passwordIsBlank = true;
+            this.#passwordIsBlank = true;
         } else {
             this.#passwordWarn.textContent = this.#NON_BREAKING_SPACE;
             this.#addValidFieldStyle(this.#passwordInput);
-            this.passwordIsBlank = false;
+            this.#passwordIsBlank = false;
         }
     }
-    setPasswordsNotMatchWarn() {
+    #setPasswordsNotMatchWarn() {
         if (this.#passwordInput.value === this.#passwordRepeatInput.value) {
             this.#passwordWarn.textContent = this.#NON_BREAKING_SPACE;
             this.#repeatPasswordWarn.textContent = this.#NON_BREAKING_SPACE;
             this.#addValidFieldStyle(this.#passwordInput);
             this.#addValidFieldStyle(this.#passwordRepeatInput);
-            this.passwordsMatch = true;
+            this.#passwordsMatch = true;
         }
         if (this.#passwordInput.value !== this.#passwordRepeatInput.value) {
             this.#passwordWarn.textContent = this.#PASSWORDS_NOT_MATCHING;
             this.#repeatPasswordWarn.textContent = this.#PASSWORDS_NOT_MATCHING;
             this.#removeValidFieldStyle(this.#passwordInput);
             this.#removeValidFieldStyle(this.#passwordRepeatInput);
-            this.passwordsMatch = false;
+            this.#passwordsMatch = false;
         }
         if (this.#passwordInput.value.length === 0 && this.#passwordRepeatInput.value.length === 0) {
             this.#passwordWarn.textContent = this.#BLANK;
             this.#repeatPasswordWarn.textContent = this.#BLANK;
             this.#removeValidFieldStyle(this.#passwordInput);
             this.#removeValidFieldStyle(this.#passwordRepeatInput);
-            this.passwordsMatch = false;
+            this.#passwordsMatch = false;
         }
     }
-    setPasswordTooShortWarn() {
+    #setPasswordTooShortWarn() {
         if (this.#passwordInput.value.length < 8) {
             this.#removeValidFieldStyle(this.#passwordInput);
             this.#passwordWarn.textContent = this.#PASSWORD_TOO_SHORT;
@@ -567,110 +594,116 @@ class $a8765a910c4e806a$var$RegisterView {
         if (this.#passwordInput.value.length === 0) {
             this.#passwordWarn.textContent = this.#BLANK;
             this.#removeValidFieldStyle(this.#passwordInput);
-            this.passwordIsBlank = true;
+            this.#passwordIsBlank = true;
         }
     }
-    setEmptyFirstNameWarn() {
+    #setEmptyFirstNameWarn() {
         if (this.#firstNameInput.value.length === 0) {
             this.#firstNameWarn.textContent = this.#BLANK;
             this.#removeValidFieldStyle(this.#firstNameInput);
-            this.firstNameIsBlank = true;
+            this.#firstNameIsBlank = true;
         } else {
             this.#firstNameWarn.textContent = this.#NON_BREAKING_SPACE;
             this.#addValidFieldStyle(this.#firstNameInput);
-            this.firstNameIsBlank = false;
+            this.#firstNameIsBlank = false;
         }
     }
-    setEmptyLastNameWarn() {
+    #setEmptyLastNameWarn() {
         if (this.#lastNameInput.value.length === 0) {
             this.#lastNameWarn.textContent = this.#BLANK;
             this.#removeValidFieldStyle(this.#lastNameInput);
-            this.lastNameIsBlank = true;
+            this.#lastNameIsBlank = true;
         } else {
             this.#lastNameWarn.textContent = this.#NON_BREAKING_SPACE;
             this.#addValidFieldStyle(this.#lastNameInput);
-            this.lastNameIsBlank = false;
+            this.#lastNameIsBlank = false;
         }
     }
-    setEmptyEmailWarn() {
+    #setEmptyEmailWarn() {
         if (this.#emailInput.value.length === 0) {
             this.#emailWarn.textContent = this.#BLANK;
             this.#removeValidFieldStyle(this.#lastNameInput);
-            this.emailIsBlank = true;
-            this.emailFormatIsCorrect = false;
+            this.#emailIsBlank = true;
+            this.#emailFormatIsCorrect = false;
         } else {
             this.#emailWarn.textContent = this.#NON_BREAKING_SPACE;
             this.#addValidFieldStyle(this.#lastNameInput);
-            this.emailIsBlank = false;
+            this.#emailIsBlank = false;
         }
     }
-    setInvalidEmailWarn() {
+    #setInvalidEmailWarn() {
         const match = this.#emailInput.value.match(/[0-9a-zA-z_]+@[0-9a-zA-z_]+\.[a-z]+/);
-        this.setEmptyEmailWarn();
-        if (!this.emailIsBlank) {
+        this.#setEmptyEmailWarn();
+        if (!this.#emailIsBlank) {
             if (match) {
                 this.#emailWarn.textContent = this.#NON_BREAKING_SPACE;
                 this.#addValidFieldStyle(this.#emailInput);
-                this.emailFormatIsCorrect = true;
-                this.emailIsBlank = false;
+                this.#emailFormatIsCorrect = true;
+                this.#emailIsBlank = false;
             } else {
                 this.#emailWarn.textContent = this.#INVALID_EMAIL_FORMAT;
                 this.#removeValidFieldStyle(this.#emailInput);
-                this.emailFormatIsCorrect = false;
+                this.#emailFormatIsCorrect = false;
             }
         }
     }
-    setEmptyBirthDateWarn() {
+    #setEmptyBirthDateWarn() {
         const date = this.#birthDateInput.value;
         const year = date.slice(0, 4);
         if (year.startsWith("1") || year.startsWith("2")) {
             this.#birthDateWarn.textContent = this.#NON_BREAKING_SPACE;
             this.#addValidFieldStyle(this.#birthDateInput);
-            this.birthDateIsBlank = false;
+            this.#birthDateIsBlank = false;
         } else {
             this.#birthDateWarn.textContent = this.#BLANK;
             this.#removeValidFieldStyle(this.#birthDateInput);
-            this.birthDateIsBlank = true;
+            this.#birthDateIsBlank = true;
         }
     }
-    handleEmptyUsername() {
+    #handleEmptyUsername() {
         this.#usernameInput.addEventListener("input", ()=>{
-            this.setEmptyUsernameWarn();
+            this.#setEmptyUsernameWarn();
         });
     }
-    handleInvalidPassword() {
+    #handleInvalidPassword() {
         this.#passwordInput.addEventListener("input", ()=>{
-            this.setEmptyPasswordWarn();
-            this.setPasswordsNotMatchWarn();
-            this.setPasswordTooShortWarn();
+            this.#setEmptyPasswordWarn();
+            this.#setPasswordsNotMatchWarn();
+            this.#setPasswordTooShortWarn();
         });
         this.#passwordRepeatInput.addEventListener("input", ()=>{
-            this.setEmptyPasswordWarn();
-            this.setPasswordsNotMatchWarn();
+            this.#setEmptyPasswordWarn();
+            this.#setPasswordsNotMatchWarn();
         });
     }
-    handleEmptyFirstName() {
+    #handleEmptyFirstName() {
         this.#firstNameInput.addEventListener("input", ()=>{
-            this.setEmptyFirstNameWarn();
+            this.#setEmptyFirstNameWarn();
         });
     }
-    handleEmptyLastName() {
+    #handleEmptyLastName() {
         this.#lastNameInput.addEventListener("input", ()=>{
-            this.setEmptyLastNameWarn();
+            this.#setEmptyLastNameWarn();
         });
     }
-    handleInvalidEmail() {
+    #handleInvalidEmail() {
         this.#emailInput.addEventListener("input", ()=>{
-            this.setInvalidEmailWarn();
+            this.#setInvalidEmailWarn();
         });
     }
-    handleEmptyBirthDate() {
+    #handleEmptyBirthDate() {
         this.#birthDateInput.addEventListener("input", ()=>{
-            this.setEmptyBirthDateWarn();
+            this.#setEmptyBirthDateWarn();
+        });
+    }
+    #handleHideBirthDatePlaceholder() {
+        this.#birthDateInput.addEventListener("input", ()=>{
+            if (!this.#birthDatePlaceholder.classList.contains("disp-n")) this.#birthDatePlaceholder.classList.add("disp-n");
+            if (this.#birthDateInput.value.length === 0) this.#birthDatePlaceholder.classList.remove("disp-n");
         });
     }
     fieldsAreValid() {
-        return !this.usernameIsBlank && !this.passwordIsBlank && this.passwordsMatch && !this.firstNameIsBlank && !this.lastNameIsBlank && !this.emailIsBlank && this.emailFormatIsCorrect && !this.birthDateIsBlank;
+        return !this.#usernameIsBlank && !this.#passwordIsBlank && this.#passwordsMatch && !this.#firstNameIsBlank && !this.#lastNameIsBlank && !this.#emailIsBlank && this.#emailFormatIsCorrect && !this.#birthDateIsBlank;
     }
     resetFieldsValues() {
         this.#usernameInput.value = "";
@@ -682,17 +715,24 @@ class $a8765a910c4e806a$var$RegisterView {
         this.#birthDateInput.value = "";
     }
     resetFieldsValidityValues() {
-        this.usernameIsBlank = true;
-        this.passwordIsBlank = true;
-        this.passwordsMatch = false;
-        this.firstNameIsBlank = true;
-        this.lastNameIsBlank = true;
-        this.emailIsBlank = true;
-        this.emailFormatIsCorrect = false;
-        this.birthDateIsBlank = true;
+        this.#usernameIsBlank = true;
+        this.#passwordIsBlank = true;
+        this.#passwordsMatch = false;
+        this.#firstNameIsBlank = true;
+        this.#lastNameIsBlank = true;
+        this.#emailIsBlank = true;
+        this.#emailFormatIsCorrect = false;
+        this.#birthDateIsBlank = true;
+    }
+    slideToFirstPage() {
+        this.#registerCredentials.classList.remove("slide-register-page");
+        this.#registerBtns.classList.remove("slide-register-page");
     }
     handleRegister(handler) {
-        this.#registerBtn.addEventListener("click", handler);
+        this.#registerBtn.addEventListener("click", ()=>{
+            handler();
+            if (this.#usernameIsBlank || this.#passwordIsBlank || !this.#passwordsMatch) this.slideToFirstPage();
+        });
     }
     getInputCredentials() {
         return {
@@ -713,13 +753,34 @@ class $a8765a910c4e806a$var$RegisterView {
         if (display) this.#registerContainer.classList.remove("disp-n");
         else this.#registerContainer.classList.add("disp-n");
     }
+    #setPageSlideHandler() {
+        this.#nextPageBtn.addEventListener("click", ()=>{
+            this.#registerCredentials.classList.add("slide-register-page");
+            this.#registerBtns.classList.add("slide-register-page");
+        });
+        this.#prevPageBtn.addEventListener("click", ()=>{
+            this.#registerCredentials.classList.remove("slide-register-page");
+            this.#registerBtns.classList.remove("slide-register-page");
+        });
+    }
+    #handleGoToLoginPage() {
+        const loginPage = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".login-container");
+        const registerPage = (0, $f809d426beefc95d$export$2fa187e846a241c4)(".register-container");
+        this.#loginLink.addEventListener("click", ()=>{
+            registerPage.classList.add("disp-n");
+            loginPage.classList.remove("disp-n");
+        });
+    }
     initHandlers() {
-        this.handleEmptyUsername();
-        this.handleInvalidPassword();
-        this.handleEmptyFirstName();
-        this.handleEmptyLastName();
-        this.handleInvalidEmail();
-        this.handleEmptyBirthDate();
+        this.#handleEmptyUsername();
+        this.#handleInvalidPassword();
+        this.#handleEmptyFirstName();
+        this.#handleEmptyLastName();
+        this.#handleInvalidEmail();
+        this.#handleEmptyBirthDate();
+        this.#handleHideBirthDatePlaceholder();
+        this.#setPageSlideHandler();
+        this.#handleGoToLoginPage();
     }
 }
 var $a8765a910c4e806a$export$2e2bcd8739ae039 = new $a8765a910c4e806a$var$RegisterView();
@@ -727,289 +788,13 @@ var $a8765a910c4e806a$export$2e2bcd8739ae039 = new $a8765a910c4e806a$var$Registe
 
 
 
-
-
-
-
-const $eef46e2d33235eb6$export$d544908989d471e1 = async function(pictureId) {
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/pictures/${pictureId}`, {
-            method: "GET",
-            mode: "cors"
-        });
-        return await response.json();
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$b4ebf6c90209897e = async function(userId, pageStart, offset) {
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/users/${userId}/pictures?pageStart=${pageStart}&offset=${offset}`, {
-            method: "GET",
-            mode: "cors"
-        });
-        return await response.json();
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$5a3de95bd96b4be4 = async function(userId, placeType, pageStart, offset) {
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/users/${userId}/place-types/pictures?placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`, {
-            method: "GET",
-            mode: "cors"
-        });
-        return await response.json();
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$a94c9f36f1284cc = async function(city, pageStart, offset) {
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/cities/pictures?city=${city}&pageStart=${pageStart}&offset=${offset}`, {
-            method: "GET",
-            mode: "cors"
-        });
-        return await response.json();
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$7ededf6ee4ca2ee5 = async function(city, placeType, pageStart, offset) {
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/cities/place-types/pictures?city=${city}&placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`, {
-            method: "GET",
-            mode: "cors"
-        });
-        return await response.json();
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$9525572eec76364a = async function(commune, pageStart, offset) {
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/communes/pictures?commune=${commune}&pageStart=${pageStart}&offset=${offset}`, {
-            method: "GET",
-            mode: "cors"
-        });
-        return await response.json();
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$cb0e14d645039bc5 = async function(commune, placeType, pageStart, offset) {
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/communes/place-types/pictures?commune=${commune}&placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`, {
-            method: "GET",
-            mode: "cors"
-        });
-        return await response.json();
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$9b36d94c7f49bc54 = async function(village, pageStart, offset) {
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/villages/pictures?village=${village}&pageStart=${pageStart}&offset=${offset}`, {
-            method: "GET",
-            mode: "cors"
-        });
-        return await response.json();
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$20daed8b38ba86da = async function(village, placeType, pageStart, offset) {
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/villages/place-types/pictures?village=${village}&placeType=${placeType}&pageStart=${pageStart}&offset=${offset}`, {
-            method: "GET",
-            mode: "cors"
-        });
-        return await response.json();
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$23994a2c03565db4 = async function(placeName, pageStart, offset) {
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/place-names/pictures?placeName=${placeName}&pageStart=${pageStart}&offset=${offset}`, {
-            method: "GET",
-            mode: "cors"
-        });
-        return await response.json();
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$fb8215fc94321214 = async function(pictureInfo, file) {
-    await $9ca267e83c32477d$export$31d3b41ce7c0630a();
-    (0, $abe576d488ba8d5a$export$70dd6790042097ea).set("X-XSRF-TOKEN", $9ca267e83c32477d$export$ae84d5b11df39dd7());
-    (0, $abe576d488ba8d5a$export$70dd6790042097ea).set("Accept", "*/*");
-    (0, $abe576d488ba8d5a$export$70dd6790042097ea).delete("Content-Type");
-    const formData = new FormData();
-    formData.append("pictureInfo", new Blob([
-        JSON.stringify(pictureInfo)
-    ], {
-        type: "application/json"
-    }));
-    formData.append("file", file);
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/pictures/${(0, $9633ccb90f21f6fe$export$50ccdb6194b9cae).getUserId()}`, {
-            method: "POST",
-            mode: "cors",
-            credentials: "include",
-            body: formData,
-            headers: (0, $abe576d488ba8d5a$export$70dd6790042097ea)
-        });
-        (0, $abe576d488ba8d5a$export$70dd6790042097ea).delete("Accept", "*/*");
-        (0, $abe576d488ba8d5a$export$70dd6790042097ea).set("Content-Type", "application/json");
-        return response;
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$5360c639b27a4f05 = async function(pictureId) {
-    await $9ca267e83c32477d$export$31d3b41ce7c0630a();
-    (0, $abe576d488ba8d5a$export$70dd6790042097ea).set("X-XSRF-TOKEN", $9ca267e83c32477d$export$ae84d5b11df39dd7());
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/pictures/${(0, $9633ccb90f21f6fe$export$50ccdb6194b9cae).getUserId()}/${pictureId}`, {
-            method: "DELETE",
-            mode: "cors",
-            credentials: "include",
-            headers: (0, $abe576d488ba8d5a$export$70dd6790042097ea)
-        });
-        return await $193eb638393b2440$export$fd3c80c00b3490e(response);
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$9a1ff82a571f0f78 = async function(pictureId, comment) {
-    await $9ca267e83c32477d$export$31d3b41ce7c0630a();
-    (0, $abe576d488ba8d5a$export$70dd6790042097ea).set("X-XSRF-TOKEN", $9ca267e83c32477d$export$ae84d5b11df39dd7());
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/pictures/comments/${(0, $9633ccb90f21f6fe$export$50ccdb6194b9cae).getUserId()}/${pictureId}`, {
-            method: "POST",
-            mode: "cors",
-            credentials: "include",
-            body: JSON.stringify(comment),
-            headers: (0, $abe576d488ba8d5a$export$70dd6790042097ea)
-        });
-        return await $193eb638393b2440$export$fd3c80c00b3490e(response);
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$857459a43632c748 = async function(commentId, editedComment) {
-    await $9ca267e83c32477d$export$31d3b41ce7c0630a();
-    (0, $abe576d488ba8d5a$export$70dd6790042097ea).set("X-XSRF-TOKEN", $9ca267e83c32477d$export$ae84d5b11df39dd7());
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/pictures/comments/${(0, $9633ccb90f21f6fe$export$50ccdb6194b9cae).getUserId()}/${commentId}`, {
-            method: "PUT",
-            mode: "cors",
-            credentials: "include",
-            body: JSON.stringify(editedComment),
-            headers: (0, $abe576d488ba8d5a$export$70dd6790042097ea)
-        });
-        return await $193eb638393b2440$export$fd3c80c00b3490e(response);
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$1d6dfbfa508968c2 = async function(pictureId, pageStart, offset) {
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/pictures/comments/${pictureId}?pageStart=${pageStart}&offset=${offset}`, {
-            method: "GET",
-            mode: "cors"
-        });
-        return await response.json();
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$e705fc43a5ce5eed = async function(pictureId) {
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/pictures/comments/count/${pictureId}`, {
-            method: "GET",
-            mode: "cors"
-        });
-        return await response.json();
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$2e6e3ad634e3776 = async function(commentId) {
-    await $9ca267e83c32477d$export$31d3b41ce7c0630a();
-    (0, $abe576d488ba8d5a$export$70dd6790042097ea).set("X-XSRF-TOKEN", $9ca267e83c32477d$export$ae84d5b11df39dd7());
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/pictures/comments/${(0, $9633ccb90f21f6fe$export$50ccdb6194b9cae).getUserId()}/${commentId}`, {
-            method: "DELETE",
-            mode: "cors",
-            credentials: "include",
-            headers: (0, $abe576d488ba8d5a$export$70dd6790042097ea)
-        });
-        return await $193eb638393b2440$export$fd3c80c00b3490e(response);
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$6c77ee3ddb9ab824 = async function(pictureId) {
-    await $9ca267e83c32477d$export$31d3b41ce7c0630a();
-    (0, $abe576d488ba8d5a$export$70dd6790042097ea).set("X-XSRF-TOKEN", $9ca267e83c32477d$export$ae84d5b11df39dd7());
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/pictures/likes/${(0, $9633ccb90f21f6fe$export$50ccdb6194b9cae).getUserId()}/${pictureId}`, {
-            method: "POST",
-            mode: "cors",
-            credentials: "include",
-            headers: (0, $abe576d488ba8d5a$export$70dd6790042097ea)
-        });
-        return await $193eb638393b2440$export$fd3c80c00b3490e(response);
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$f566a22877a22451 = async function(pictureId, pageStart, offset) {
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/pictures/likes/${pictureId}?pageStart=${pageStart}&offset=${offset}`, {
-            method: "GET",
-            mode: "cors"
-        });
-        return await response.json();
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$e90143b3db1828ff = async function(pictureId) {
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/pictures/likes/count/${pictureId}`, {
-            method: "GET",
-            mode: "cors"
-        });
-        return await response.json();
-    } catch (err) {
-        return err.message;
-    }
-};
-const $eef46e2d33235eb6$export$434f5ae192f05d29 = async function(pictureId) {
-    await $9ca267e83c32477d$export$31d3b41ce7c0630a();
-    (0, $abe576d488ba8d5a$export$70dd6790042097ea).set("X-XSRF-TOKEN", $9ca267e83c32477d$export$ae84d5b11df39dd7());
-    try {
-        const response = await fetch(`http://${API_URL}:${API_PORT}/api/v1/pictures/likes/${(0, $9633ccb90f21f6fe$export$50ccdb6194b9cae).getUserId()}/${pictureId}`, {
-            method: "DELETE",
-            mode: "cors",
-            credentials: "include",
-            headers: (0, $abe576d488ba8d5a$export$70dd6790042097ea)
-        });
-        return await $193eb638393b2440$export$fd3c80c00b3490e(response);
-    } catch (err) {
-        return err.message;
-    }
-};
-
-
 const $ea37b78c1355d6c7$var$registerHandler = async function() {
     if ((0, $a8765a910c4e806a$export$2e2bcd8739ae039).fieldsAreValid()) {
         const response = await (0, $4ae425838adc5a73$export$6503ec6e8aabbaf)((0, $a8765a910c4e806a$export$2e2bcd8739ae039).getInputCredentials());
-        if (response.message === "User already exists") (0, $a8765a910c4e806a$export$2e2bcd8739ae039).setAlreadyExistingUsernameWarn();
+        if (response.message === "User already exists") {
+            (0, $a8765a910c4e806a$export$2e2bcd8739ae039).slideToFirstPage();
+            (0, $a8765a910c4e806a$export$2e2bcd8739ae039).setAlreadyExistingUsernameWarn();
+        }
         if (response.status === 201) {
             await (0, $4ae425838adc5a73$export$596d806903d1f59e)({
                 username: (0, $a8765a910c4e806a$export$2e2bcd8739ae039).getInputCredentials().username,
@@ -1031,25 +816,24 @@ const $ea37b78c1355d6c7$export$bf217dbf6dd4005c = function() {
 };
 
 
+
 (0, $019d5de0aed9d37f$export$81ea6467782f4df)();
 (0, $ea37b78c1355d6c7$export$bf217dbf6dd4005c)();
-(0, $926d97260bd64691$export$871de8747c9eaa88).renderMap();
-const $0deca00998e39925$var$loc = async function() {
-    const promise = new Promise((resolve, reject)=>{
-        navigator.geolocation.getCurrentPosition((pos)=>{
-            resolve({
-                latitude: pos.coords.latitude,
-                longitude: pos.coords.longitude
-            });
-        });
-        (error)=>reject(error);
-    });
-    const location = await promise;
-    return location;
-};
-console.log($0deca00998e39925$var$loc()); // loc().then((resp) => {
- //   console.log(resp);
- // });
+// console.log(MainPageView.getProfilePictureHeight());
+(0, $13183c674aedf1ed$export$2e2bcd8739ae039).sayHello(); // map.renderMap();
+ // const loc = async function () {
+ //   const promise = new Promise((resolve, reject) => {
+ //     navigator.geolocation.getCurrentPosition((pos) => {
+ //       resolve({
+ //         latitude: pos.coords.latitude,
+ //         longitude: pos.coords.longitude,
+ //       });
+ //     });
+ //     (error) => reject(error);
+ //   });
+ //   const location = await promise;
+ //   return location;
+ // };
 
 
 //# sourceMappingURL=main.js.map

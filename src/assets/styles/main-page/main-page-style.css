@@ -1,0 +1,18 @@
+.app-main-container {
+  overflow: hidden;
+}
+
+.main-page-container {
+  height: 94vh;
+  display: grid;
+  grid-template-rows: 6.2rem 1fr 5.2rem;
+  overflow: hidden;
+  z-index: 25;
+}
+
+.main-container {
+  width: 200%;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}

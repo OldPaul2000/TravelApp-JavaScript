@@ -1,0 +1,14 @@
+.take-picture-container {
+  height: 94.2%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  transform: translateY(0);
+  transition: transform 0.4s ease-out;
+  z-index: 20;
+}
+
+.take-picture-content {
+  background-color: pink;
+  height: 100%;
+}

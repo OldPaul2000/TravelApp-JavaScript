@@ -1,0 +1,112 @@
+.header-container {
+  --header-bg-color-: #ffffff;
+  --header-border-color: #2e2f2d;
+  --search-input-color: #434442;
+  --first-name-color: #585957;
+  --search-icon-color: #6d6d6c;
+  --menu-icon-color: #6d6d6c;
+}
+
+.header-container {
+  background-color: var(--header-bg-color-);
+  width: 100%;
+  height: 6.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  padding: 0 0.8rem;
+  box-shadow: 0 3px 10px 1 #2e2f2d15;
+}
+
+.first-part {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.profile-picture-container {
+  height: 4.4rem;
+  width: 4.4rem;
+  border-radius: 50%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.profile-picture {
+  transform: scale(1.4);
+  height: 100%;
+}
+
+.user-first-name {
+  color: var(--first-name-color);
+  font-family: Roboto;
+  font-size: 2rem;
+  align-content: center;
+}
+
+.second-part {
+  height: 100%;
+  width: 65%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.search-bar-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 0.4rem;
+  border-radius: 2rem;
+  padding: 0 0 0 0.8rem;
+  box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.1);
+}
+
+.search-btn {
+  background-color: transparent;
+  border: none;
+  margin-top: 0.4rem;
+}
+
+.search-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  stroke: var(--search-icon-color);
+  stroke-width: 0.24rem;
+}
+
+.search-input {
+  color: var(--search-input-color);
+  height: 3.2rem;
+  width: 100%;
+  border: none;
+  border-radius: 0 2rem 2rem 0;
+  padding: 0 0.4rem;
+  outline: 0;
+  font-size: 1.4rem;
+  border-bottom: none;
+}
+
+.search-input:focus::placeholder {
+  opacity: 0;
+}
+
+.app-menu-btn {
+  width: 6.4rem;
+  height: 90%;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-icon {
+  stroke: var(--menu-icon-color);
+  width: 3rem;
+  height: 3rem;
+}

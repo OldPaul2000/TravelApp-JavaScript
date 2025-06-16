@@ -1,0 +1,61 @@
+footer {
+  --footer-background-color: #ffffff;
+  --borders-color: #434442;
+  --icons-color: #434442;
+}
+
+footer {
+  background-color: var(--footer-background-color);
+  height: 5.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-top: var(--borders-color) solid 0.1rem;
+  padding-bottom: 0.4rem;
+  z-index: 20;
+}
+
+.home-btn,
+.my-pictures-btn {
+  background-color: transparent;
+  width: 4.4rem;
+  height: 4.4rem;
+  border: none;
+}
+
+.take-picture-btn {
+  background-color: transparent;
+  width: 4.4rem;
+  height: 4.4rem;
+  padding-top: 0.2rem;
+  border-radius: 50%;
+  border: var(--borders-color) solid 0.2rem;
+}
+
+.home-icon,
+.take-picture-icon,
+.my-pictures-icon {
+  width: 2.6rem;
+  height: 2.6rem;
+  stroke-width: 0.02rem;
+  fill: var(--icons-color);
+}
+
+.home-icon {
+  fill: transparent;
+  stroke-width: 0.15rem;
+  stroke: var(--icons-color);
+}
+
+.my-pictures-icon {
+  fill: transparent;
+  width: 3rem;
+  height: 3rem;
+  stroke: var(--icons-color);
+  stroke-width: 0.13rem;
+}
+
+.my-pictures-icon rect {
+  stroke: var(--icons-color);
+  stroke-width: 0.13rem;
+}
